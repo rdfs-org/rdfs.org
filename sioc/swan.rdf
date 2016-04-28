@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:wot="http://xmlns.com/wot/0.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+>
+
+<owl:Ontology rdf:about="http://rdfs.org/sioc/swan#" rdf:type="http://www.w3.org/2002/07/owl#Thing">
+  <dcterms:title>SWAN/SIOC Ontology Module Namespace</dcterms:title>
+  <dcterms:description>Extends the SIOC Core Ontology (Semantically-Interlinked Online Communities) by defining mappings between SIOC and the SWAN ontology.</dcterms:description>
+  <rdfs:seeAlso rdf:resource="http://rdfs.org/sioc/spec/#sec-modules"/>
+  <!-- SIOC Imports -->
+  <owl:imports rdf:resource="http://rdfs.org/sioc/ns#"/>
+  <owl:imports rdf:resource="http://rdfs.org/sioc/types#"/>
+  <!-- SWAN Imports -->
+  <owl:imports rdf:resource="http://swan.mindinformatics.org/ontologies/1.2/swan.owl" />
+</owl:Ontology>
+
+<!-- 
+Mappings for Scientific Discourse Ontology 
+  http://swan.mindinformatics.org/ontology/1.2/discourseelements.html
+  http://swan.mindinformatics.org/ontology/1.2/discourseelements.owl 
+-->
+
+<!-- Classes -->
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-elements/DiscourseElement">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-elements/ResearchStatement">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-elements/ResearchQuestion">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-elements/ResearchComment">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+</rdf:Description>
+
+<!-- 
+Mappings for Scientific Discourse Relationship
+  http://swan.mindinformatics.org/spec/1.2/discourserelationships.html
+  http://swan.mindinformatics.org/spec/1.2/discourserelationships.owl 
+-->
+
+<!-- Properties -->
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/agreesWith">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/alternativeTo">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/arousedFrom">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/cites">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/consistentWith">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/disagreesWith">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/discusses">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/inconsistentWith">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/inResponseTo">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#reply_of"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/motivatedBy">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/refersTo">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/relatedTo">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/discourse-relationships/relevantTo">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<!-- 
+Mappings for Citations Ontology
+  http://swan.mindinformatics.org/spec/1.2/citations.html
+  http://swan.mindinformatics.org/ontologies/1.2/citations.owl 
+-->
+
+<!-- Classes -->
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/citations/Citation">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/citations/JournalArticle">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/citations/WebArticle">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/citations/WebNews">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://swan.mindinformatics.org/ontologies/1.2/citations/WebComment">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/types#Comment"/>
+</rdf:Description>
+
+<!-- 
+New classes 
+-->
+
+<owl:Class rdf:about="http://rdfs.org/sioc/swan#OnlineJournal">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Container"/>
+  <rdfs:comment>An online Journal</rdfs:comment>
+</owl:Class>
+
+</rdf:RDF>

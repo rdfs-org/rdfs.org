@@ -1,0 +1,3 @@
+<p>
+The num_views property represents the number of times a particular Item, Post, Thread, UserAccount profile, etc. has been viewed. This is an example of where content is automatically created by an end user, and can increase the content's importance in terms of searching. For example, someone creates a query across a set of SIOC-enabled sites, and is returned a list of subjects and extracts from certain Posts, sorted by the popularity of the Post, as indicated by the num_views property.
+</p>

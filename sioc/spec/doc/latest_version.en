@@ -1,0 +1,3 @@
+<p>
+The latest_version property links a sioc:Item to its latest version. This can be used to link a previous version of an item (e.g. a wiki page) to its latest version.
+</p>

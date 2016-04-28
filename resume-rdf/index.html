@@ -1,0 +1,1683 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ResumeRDF Ontology Specification</title>
+  <link href="img/xmlns-style.css" rel="stylesheet" type="text/css" />
+  <link href="img/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h1>ResumeRDF Ontology Specification<br /></h1>
+
+<h2>Specification Document - 10 Jan 2007</h2>
+<dl>
+  <dt>Latest version:</dt>
+  <dd> <a href="http://rdfs.org/resume-rdf/">http://rdfs.org/resume-rdf/</a></dd>
+  <dt>Last update:</dt>
+  <dd>$Date: 2007/01/10 12:39:15 $</dd>
+  <dt>Revision:</dt>
+  <dd></dd>
+  <dt>Editors:</dt>
+  <dd><a href="http://captsolo.net/info/" title="Uldis Bojars">Uldis Bojars</a> - <a href="http://www.deri.org/" title="Digital Enterprise Research Institute">DERI</a><br/>
+</dl>
+<p class="copyright"> Copyright &copy; 2002-2006 by Uldis Bojars; &copy; 2006 by DERI Galway at the National University of Ireland, Galway, Ireland.</p>
+<p>Development of ResumeRDF is supported by <a href="http://www.sfi.ie/">Science Foundation Ireland</a> under Grant No. SFI/02/CE1/I131.</p>
+<!-- Creative Commons License -->
+<a href="http://creativecommons.org/licenses/by/1.0/"><img
+ alt="Creative Commons License" style="border: 0pt none ; float: right;"
+ src="img/somerights.gif" /></a>This work is licensed under a <a
+ href="http://creativecommons.org/licenses/by/1.0/">Creative Commons
+License</a>. This copyright applies to the <em>ResumeRDF Ontology Specification</em>
+and accompanying documentation and does not apply to ResumeRDF data formats,
+ontology terms, or technology. Regarding underlying technology, ResumeRDF
+relies heavily on W3C's <a href="http://www.w3.org/RDF/">RDF</a>
+technology, an open Web standard
+that can be freely used by anyone.
+<br />
+<a href="http://validator.w3.org/check/referer"><img src="img/valid-xhtml10"
+ style="float: right;" alt="Valid XHTML 1.0!" height="31" width="88" /> </a>
+<br />
+This visual layout and structure of the
+specification was adapted from the <a href="http://rdfs.org/sioc/spec/">SIOC
+Ontology Specification</a> by Uldis Bojars and John Breslin (eds).
+<!-- Commented out so we can XHTML validate.
+<rdf:RDF xmlns="http://web.resource.org/cc/"    xmlns:dc="http://purl.org/dc/elements/1.1/"    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><Work rdf:about=""><license rdf:resource="http://creativecommons.org/licenses/by/1.0/" /></Work><License rdf:about="http://creativecommons.org/licenses/by/1.0/">   <requires rdf:resource="http://web.resource.org/cc/Attribution" />   <permits rdf:resource="http://web.resource.org/cc/Reproduction" />   <permits rdf:resource="http://web.resource.org/cc/Distribution" />   <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />   <requires rdf:resource="http://web.resource.org/cc/Notice" /></License></rdf:RDF>
+-->
+<hr />
+
+<div>
+<h2><a name="sec-abstract" class="mozTocH2" id="sec-abstract"></a>Abstract</h2>
+<p>ResumeRDF is an ontology developed to express information contained in a personal Resume or Curriculum Vitae (CV) on the Semantic Web. This includes information about work and academic experience, skills, etc.</p>
+</div>
+<hr/>
+
+<div class="status">
+<h2>
+<a name="sec-status" class="mozTocH2" id="sec-status"></a>Status of This Document</h2>
+<p><strong>NOTE:</strong> 
+<em>This section describes the status of this document at the time
+of its publication. Other documents may supersede this document.</em>
+</p><p>This specification is an evolving document. This document is generated
+by the <a href="http://sw.deri.org/svn/sw/2005/08/sioc/ontology/spec/">SpecGen4 specification generation tool</a> from a machine-readable <a href="http://rdfs.org/resume-rdf/cv.rdfs#">ResumeRDF ontology</a> expressed in RDF/XML combined with a specification template and a set of per-term documents.</p>
+<p>Authors welcome suggestions on the <a href="http://rdfs.org/resume-rdf/">ResumeRDF ontology</a> and this document. Please send comments
+to the editors or to <a href="http://groups.google.com/group/sioc-dev">SIOC developers list</a>; public archives are
+available. This document may be updated or added to based on implementation experience, but no commitment is made
+by the authors regarding future updates.</p>
+</div>
+
+<h2 id="toc"><a name="sec-toc" class="mozTocH2" id="sec-toc"></a>Table of Contents</h2>
+<ul>
+  <li><a href="#sec-intro">Introduction</a>
+    <ul>
+      <li><a href="#sec-notation">Terminology and Notation</a></li>
+    </ul>
+  </li>
+  <li><a href="#sec-glance">ResumeRDF At A Glance</a></li>
+  <!-- SIOC Implementations: authoring / editing tools aggregators / harvesters -->
+  <li><a href="#sec-xref">ResumeRDF cross-reference: Classes and Properties</a></li>
+  <li><a href="#sec-external">External Classes and Properties</a></li>
+  <li><a href="#sec-reference">References</a></li>
+  <li><a href="#sec-changes">Change Log</a></li>
+</ul>
+<hr />
+
+<h2><a name="sec-intro" class="mozTocH2" id="sec-intro"></a>Introduction</h2>
+
+<p>ResumeRDF is an ontology designed to express information contained within personal
+Resume or Curriculum Vitae (CV) on the Semantic Web.</p><p>
+It allows to describe professional work experience, education details, skills, certification and
+courses attended, and other relevant information.</p>
+
+<h3><a name="sec-notation" class="mozTocH3" id="sec-notation"></a>Terminology and Notation</h3>
+<p>The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in RFC 2119 [<a href="#ref-rfc2119">RFC 2119</a>].</p>
+<p>Namespace URIs of the general form "http://www.example.com/." represents some application-dependent
+or context-dependent URI as defined in RFC 2396 [<a href="#ref-rfc2396">RFC 2396</a>].</p>
+<p>The XML Namespace URIs that MUST be used by implementations of this specification is:</p>
+<ul>
+<li><a href="http://rdfs.org/resume-rdf/cv.rdfs#">http://rdfs.org/resume-rdf/cv.rdfs#</a> - ResumeRDF ontology</li>
+<li><a href="http://rdfs.org/resume-rdf/base.rdfs#">http://rdfs.org/resume-rdf/base.rdfs#</a> - base taxonomy containing possible values for ResumeRDF properties</li>
+</ul>
+
+<div class="glance">
+<h2><a name="sec-glance" class="mozTocH2" id="sec-glance"></a>ResumeRDF At A Glance</h2>
+<p>An alphabetical index of ResumeRDF terms, by class (categories or types) and by
+property. All the terms are hyperlinked to their detailed description for quick reference.
+</p>
+<div style="padding: 5px; border: dotted; background-color: #ddd;">
+<p>Classes: | <a href="#term_CV">CV</a> |  <a href="#term_CV_Entry">CV_Entry</a> |  <a href="#term_Company">Company</a> |  <a href="#term_Course">Course</a> |  <a href="#term_Education">Education</a> |  <a href="#term_EducationalOrg">EducationalOrg</a> |  <a href="#term_LanguageSkill">LanguageSkill</a> |  <a href="#term_Organization">Organization</a> |  <a href="#term_OtherInfo">OtherInfo</a> |  <a href="#term_Person">Person</a> |  <a href="#term_PersonalReference">PersonalReference</a> |  <a href="#term_ProfessionalReference">ProfessionalReference</a> |  <a href="#term_Refernece">Refernece</a> |  <a href="#term_Skill">Skill</a> |  <a href="#term_Target">Target</a> |  <a href="#term_WorkHistory">WorkHistory</a> | 
+</p>
+<p>Properties: | <a href="#term_Country">Country</a> |  <a href="#term_Industry">Industry</a> |  <a href="#term_Locality">Locality</a> |  <a href="#term_Name">Name</a> |  <a href="#term_Notes">Notes</a> |  <a href="#term_URL">URL</a> |  <a href="#term_aboutPerson">aboutPerson</a> |  <a href="#term_birthPlace">birthPlace</a> |  <a href="#term_careerLevel">careerLevel</a> |  <a href="#term_conditionWillRelocate">conditionWillRelocate</a> |  <a href="#term_conditionWillTravel">conditionWillTravel</a> |  <a href="#term_courseDescription">courseDescription</a> |  <a href="#term_courseFinishDate">courseFinishDate</a> |  <a href="#term_courseStartDate">courseStartDate</a> |  <a href="#term_courseTitle">courseTitle</a> |  <a href="#term_courseURL">courseURL</a> |  <a href="#term_cvCopyright">cvCopyright</a> |  <a href="#term_cvDescription">cvDescription</a> |  <a href="#term_cvIsActive">cvIsActive</a> |  <a href="#term_cvIsConfidential">cvIsConfidential</a> |  <a href="#term_cvTitle">cvTitle</a> |  <a href="#term_degreeType">degreeType</a> |  <a href="#term_eduDescription">eduDescription</a> |  <a href="#term_eduGradDate">eduGradDate</a> |  <a href="#term_eduMajor">eduMajor</a> |  <a href="#term_eduMinor">eduMinor</a> |  <a href="#term_eduStartDate">eduStartDate</a> |  <a href="#term_employedIn">employedIn</a> |  <a href="#term_endDate">endDate</a> |  <a href="#term_gender">gender</a> |  <a href="#term_hasCitizenship">hasCitizenship</a> |  <a href="#term_hasCourse">hasCourse</a> |  <a href="#term_hasDriversLicense">hasDriversLicense</a> |  <a href="#term_hasEducation">hasEducation</a> |  <a href="#term_hasNationality">hasNationality</a> |  <a href="#term_hasOtherInfo">hasOtherInfo</a> |  <a href="#term_hasReference">hasReference</a> |  <a href="#term_hasSkill">hasSkill</a> |  <a href="#term_hasTarget">hasTarget</a> |  <a href="#term_hasWorkHistory">hasWorkHistory</a> |  <a href="#term_isCertification">isCertification</a> |  <a href="#term_isCurrent">isCurrent</a> |  <a href="#term_jobDescription">jobDescription</a> |  <a href="#term_jobTitle">jobTitle</a> |  <a href="#term_jobType">jobType</a> |  <a href="#term_lastUpdate">lastUpdate</a> |  <a href="#term_lngSkillLevelReading">lngSkillLevelReading</a> |  <a href="#term_lngSkillLevelWritten">lngSkillLevelWritten</a> |  <a href="#term_maritalStatus">maritalStatus</a> |  <a href="#term_noOfChildren">noOfChildren</a> |  <a href="#term_numSubordinates">numSubordinates</a> |  <a href="#term_organizedBy">organizedBy</a> |  <a href="#term_otherInfoDescription">otherInfoDescription</a> |  <a href="#term_otherInfoType">otherInfoType</a> |  <a href="#term_referenceBy">referenceBy</a> |  <a href="#term_skillLastUsed">skillLastUsed</a> |  <a href="#term_skillLevel">skillLevel</a> |  <a href="#term_skillName">skillName</a> |  <a href="#term_skillYearsExperience">skillYearsExperience</a> |  <a href="#term_startDate">startDate</a> |  <a href="#term_studiedIn">studiedIn</a> |  <a href="#term_targetCareerLevel">targetCareerLevel</a> |  <a href="#term_targetCompanyDescription">targetCompanyDescription</a> |  <a href="#term_targetCompanyIndustry">targetCompanyIndustry</a> |  <a href="#term_targetCompanySize">targetCompanySize</a> |  <a href="#term_targetCountry">targetCountry</a> |  <a href="#term_targetJobDescription">targetJobDescription</a> |  <a href="#term_targetJobMode">targetJobMode</a> |  <a href="#term_targetJobType">targetJobType</a> |  <a href="#term_targetSalary">targetSalary</a> |  <a href="#term_targetSalaryCurrency">targetSalaryCurrency</a> |  <a href="#term_weeksNoticePeriod">weeksNoticePeriod</a> | 
+</p>
+</div>
+</div>
+
+<!--<h2><a name="sec-overview" class="mozTocH2" id="sec-overview"></a>SIOC Overview</h2>
+<p>
+The SIOC Ontology definitions presented here are written using
+a computer language (RDF/OWL) that makes it easy for software to
+process some basic facts about the terms in the SIOC ontology, and
+consequently about the things described in SIOC documents. A SIOC
+document, unlike a traditional Web page, can be combined with other
+SIOC documents to create a unified database of information.</p>
+<h3><a name="sec-example" class="mozTocH2" id="sec-example"></a>Example</h3>
+<p>Here is a very basic document describing a blog entry:
+</p>
+<div class="example">
+<pre>
+<span class="line_nr"> 1</span>  &lt;sioc:Post rdf:about="http://johnbreslin.com/blog/2006/09/07/creating-connections-between-discussion-clouds-with-sioc/"&gt;
+<span class="line_nr"> 2</span>      &lt;dc:title&gt;Creating connections between discussion clouds with SIOC&lt;/dc:title&gt;
+<span class="line_nr"> 3</span>      &lt;dcterms:created&gt;2006-09-07T09:33:30Z&lt;/dcterms:created&gt;
+<span class="line_nr"> 4</span>      &lt;sioc:has_container rdf:resource="http://johnbreslin.com/blog/index.php?sioc_type=site#weblog"/&gt;
+<span class="line_nr"> 5</span>      &lt;sioc:has_creator&gt;
+<span class="line_nr"> 6</span>          &lt;sioc:User rdf:about="http://johnbreslin.com/blog/author/cloud/" rdfs:label="Cloud"&gt;
+<span class="line_nr"> 7</span>              &lt;rdfs:seeAlso rdf:resource="http://johnbreslin.com/blog/index.php?sioc_type=user&amp;sioc_id=1"/&gt;
+<span class="line_nr"> 8</span>          &lt;/sioc:User&gt;
+<span class="line_nr"> 9</span>      &lt;/sioc:has_creator&gt;
+<span class="line_nr">10</span>      &lt;sioc:content&gt;SIOC provides a unified vocabulary for content and interaction description: a semantic layer that can co-exist with existing discussion platforms.&lt;/sioc:content&gt;
+<span class="line_nr">11</span>      &lt;sioc:topic rdfs:label="Semantic Web" rdf:resource="http://johnbreslin.com/blog/category/semantic-web/"/&gt;
+<span class="line_nr">12</span>      &lt;sioc:topic rdfs:label="Blogs" rdf:resource="http://johnbreslin.com/blog/category/blogs/"/&gt;
+<span class="line_nr">13</span>      &lt;sioc:has_reply&gt;
+<span class="line_nr">14</span>          &lt;sioc:Post rdf:about="http://johnbreslin.com/blog/2006/09/07/creating-connections-between-discussion-clouds-with-sioc/#comment-123928"&gt;
+<span class="line_nr">15</span>              &lt;rdfs:seeAlso rdf:resource="http://johnbreslin.com/blog/index.php?sioc_type=comment&amp;sioc_id=123928"/&gt;
+<span class="line_nr">16</span>          &lt;/sioc:Post&gt;
+<span class="line_nr">17</span>      &lt;/sioc:has_reply&gt;
+<span class="line_nr">18</span>  &lt;/sioc:Post&gt;
+</pre>
+</div>
+<p>This brief example introduces the basics of SIOC.<br />
+</p>
+<p>It says:
+</p>
+<ul>
+<li>There is a <code>sioc:Post</code> object identified as <code>http://johnbreslin.com/blog/2006/09/07/creating-connections-between-discussion-clouds-with-sioc/
+which has the following properties:</code>
+<ul>
+<li><code>dc:title</code>
+property with value "Creating connections between discussion clouds
+with SIOC"</li>
+<li><code>dcterms:created</code> property with ISO-8601 formatted
+date value <code>2006-09-07T09:33:30Z</code> </li>
+<li><code>sioc:has_container</code> relationship with an object
+identified as <code>http://johnbreslin.com/blog/index.php?sioc_type=site#weblog
+</code>indicates <code></code> a <code>sioc:Forum</code>
+object (a weblog in this case) this post belongs to</li>
+<li><code>sioc:has_creator</code> relationship with a <code>sioc:User</code>
+object labeled "Cloud" and identified as <code>http://johnbreslin.com/blog/author/cloud/</code>
+with an <code>rdfs:seeAlso </code>property pointing to more SIOC
+information about this object located at <code>http://johnbreslin.com/blog/index.php?sioc_type=user&amp;sioc_id=1</code><code></code></li>
+<li><code>sioc:content</code> property with a text only
+representation of the content<code></code></li>
+<li><code>sioc:topic</code> properties indicating topics: <code>"Semantic
+Web" identified as </code><code>http://johnbreslin.com/blog/category/semantic-web/
+</code>and <code>"</code><code>Blogs"</code> identified as <code>http://johnbreslin.com/blog/category/blogs/</code>
+<span style="font-family: monospace;"></span></li>
+<li><span style="font-family: monospace;"></span><code>sioc:has_reply</code>
+relationship (pointing to replies and comments of a post) with a <code>sioc:Post</code>
+object identified as&nbsp;<code></code><code>http://johnbreslin.com/blog/2006/09/07/creating-connections-between-discussion-clouds-with-sioc/#comment-123928</code>
+with an <code>rdfs:seeAlso </code>property pointing to more SIOC
+information about this reply located at <code>http://johnbreslin.com/blog/index.php?sioc_type=comment&amp;sioc_id=123928</code></li>
+</ul>
+</li>
+</ul>
+In other words:
+<ul>
+<li>There is a post titled "Creating connections between discussion
+clouds
+with SIOC" created at 09:33:30 on 2006-09-07 written by a user "Cloud"
+on topics "Blogs" and "Semantic Web" with contents described in <code>sioc:content</code>.
+</li>
+<li>More information about its author can be found at <code>http://johnbreslin.com/blog/index.php?sioc_type=user&amp;sioc_id=1</code></li>
+<li>It has a reply and detailed SIOC information about it can be
+found at <code>http://johnbreslin.com/blog/index.php?sioc_type=comment&amp;sioc_id=123928</code></li>
+</ul>
+<p>This simple example uses only one class of SIOC objects - <code>sioc:Post</code>.
+There are other classes in SIOC used to describe more information about
+users, sites, communities and other objects.</p>
+<p>SIOC documents may use other existing ontologies to enrich the
+information described. Additional information about creator of
+the post can be described using <a href="http://xmlns.com/foaf/0.1/">FOAF
+Vocabulary</a> and<code> foaf:maker </code>property. Rich content of
+the post (e.g., HTML representation) can
+be described using <a
+href="http://bblfish.net/work/atom-owl/2006-06-06/AtomOwl.html">AtomOWL</a>
+or <a href="http://web.resource.org/rss/1.0/modules/content/">RSS 1.0
+Content module</a>.</p>
+<p>See a full SIOC profile of the blog post which uses FOAF for personal information and RSS 1.0 content module for rich content:
+(a) <a
+href="http://johnbreslin.com/blog/index.php?sioc_type=post&amp;sioc_id=517">in
+RDF/XML</a>;
+(b) <a
+href="http://sparql.captsolo.net/browser/browser.py?url=http%3A//johnbreslin.com/blog/index.php%3Fsioc_type%3Dpost%26sioc_id%3D517">rendered
+in SIOC Browser</a>. This profile is generated by the <a href="http://sioc-project.org/wordpress/">WordPress SIOC export plugin</a>.</p>
+-->
+<!--<h2><a name="sec-background" class="mozTocH2" id="sec-background"></a>Background</h2>
+SIOC is managed as a collaborative effort amongst members of the
+<a href="http://sw.deri.ie/">Semantic Web Cluster</a> at DERI Galway and Semantic
+Web developers on the <a href="http://groups.google.com/group/sioc-dev">SIOC mailing list</a>. The name
+'SIOC' is an acronym for 'Semantically-Interlnked Online Community',
+and is coincidentally the Irish word for 'frost'.<br />
+<p>More resources on SIOC are available on the <a href="http://sioc-project.org/">SIOC Project page</a>.</p>
+<p>The remainder of this specification describes how to publish and interpret descriptions such as these on the Web, using RDF/XML for syntax (file format) and terms from SIOC. It introduces a number of categories (SIOC classes such as 'Post') and properties (relationship and attribute types such as 'topic' or 'has_creator'). Each term definition is provided in both human and machine-readable form, hyperlinked for quick reference.</p>
+<p>The specific contents of the SIOC ontology are detailed in the <a
+ href="http://rdfs.org/sioc/ns#">SIOC namespace document</a>.</p>
+<p>Related publications:</p>
+<ul>
+  <li>J.G. Breslin, A. Harth, U. Bojars, S. Decker, "Towards
+Semantically-Interlinked Online Communities", Proceedings of the 2nd
+European Semantic Web Conference (ESWC '05), LNCS vol. 3532, pp.
+500-514, Heraklion, Greece, 2005.<br/>
+<a class="small" href="http://www.springerlink.com/openurl.asp?genre=article&amp;issn=0302-9743&amp;volume=3532&amp;spage=500">[SpringerLink]</a>
+<a class="small" href="http://sw.deri.org/2004/12/sioc/index.pdf">[PDF]</a><br />
+  </li>
+<li>For more publications see <a href="http://sioc-project.org/publications/">http://sioc-project.org/publications/</a></li>
+</ul>-->
+<!--<h2><a name="sec-vocab" class="mozTocH2" id="sec-vocab"></a>The ResumeRDF Ontology
+Description</h2>
+<p>This specification serves as the ResumeRDF "namespace document". As such
+it describes the SIOC ontology and the terms (<a
+ href="http://www.w3.org/RDF/">RDF</a> classes and properties) that
+constitute it, so that <a href="http://www.w3.org/2001/sw/">Semantic
+Web</a> applications can use those terms in a variety of RDF-compatible
+document formats and applications.
+</p>
+<p>This document presents SIOC as a <a
+ href="http://www.w3.org/2001/sw/">Semantic Web</a> vocabulary or <em>Ontology</em>.
+The SIOC ontology is straightforward, pragmatic and designed to allow
+simultaneous deployment and extension, and is therefore intended for
+widescale use. </p>-->
+<h2><a name="sec-xref" class="mozTocH2" id="sec-xref"></a>ResumeRDF cross-reference: Classes and Properties</h2>
+<p>ResumeRDF introduces the following classes and properties. See <a href="http://rdfs.org/resume-rdf/cv.rdfs#">ResumeRDF
+namespace document in RDF/XML</a> for more detail.</p>
+<!-- the following is the script-generated list of classes and properties -->
+<h3>Classes and Properties (full detail)</h3><div class="specterm" id="term_CV">
+<h3>Class: cv:CV</h3>
+<p><em>CV</em> - CV subclass of WordNet Curriculum Vitae <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-domain-of:</th><td><a href="#term_aboutPerson">cv:aboutPerson</a> <a href="#term_hasWorkHistory">cv:hasWorkHistory</a> <a href="#term_hasEducation">cv:hasEducation</a> <a href="#term_hasCourse">cv:hasCourse</a> <a href="#term_hasSkill">cv:hasSkill</a> <a href="#term_hasReference">cv:hasReference</a> <a href="#term_hasTarget">cv:hasTarget</a> <a href="#term_hasOtherInfo">cv:hasOtherInfo</a> <a href="#term_lastUpdate">cv:lastUpdate</a> <a href="#term_cvTitle">cv:cvTitle</a> <a href="#term_cvDescription">cv:cvDescription</a> <a href="#term_cvCopyright">cv:cvCopyright</a> <a href="#term_cvIsConfidential">cv:cvIsConfidential</a> <a href="#term_cvIsActive">cv:cvIsActive</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_CV_Entry">
+<h3>Class: cv:CV_Entry</h3>
+<p><em>CV_Entry</em> - Single entry of CV information. Type of CV information specified in subclasses <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Company">
+<h3>Class: cv:Company</h3>
+<p><em>Company</em> - A class for company information. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_employedIn">cv:employedIn</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_Industry">cv:Industry</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Course">
+<h3>Class: cv:Course</h3>
+<p><em>Course</em> - CV entry for courses taken <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_hasCourse">cv:hasCourse</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_organizedBy">cv:organizedBy</a> <a href="#term_isCertification">cv:isCertification</a> <a href="#term_courseTitle">cv:courseTitle</a> <a href="#term_courseDescription">cv:courseDescription</a> <a href="#term_courseURL">cv:courseURL</a> <a href="#term_courseStartDate">cv:courseStartDate</a> <a href="#term_courseFinishDate">cv:courseFinishDate</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Education">
+<h3>Class: cv:Education</h3>
+<p><em>Education</em> - CV entry for education <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_hasEducation">cv:hasEducation</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_studiedIn">cv:studiedIn</a> <a href="#term_eduStartDate">cv:eduStartDate</a> <a href="#term_eduGradDate">cv:eduGradDate</a> <a href="#term_degreeType">cv:degreeType</a> <a href="#term_eduMajor">cv:eduMajor</a> <a href="#term_eduMinor">cv:eduMinor</a> <a href="#term_eduDescription">cv:eduDescription</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_EducationalOrg">
+<h3>Class: cv:EducationalOrg</h3>
+<p><em>EducationalOrg</em> - Educational organization (university, ...) <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_studiedIn">cv:studiedIn</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_LanguageSkill">
+<h3>Class: cv:LanguageSkill</h3>
+<p><em>LanguageSkill</em> - Language skill.
+Contains 3 levels for skill: spoken, written, reading.
+Inherited skill level used for spoken. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Organization">
+<h3>Class: cv:Organization</h3>
+<p><em>Organization</em> - General class for organizations <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_organizedBy">cv:organizedBy</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_Name">cv:Name</a> <a href="#term_Country">cv:Country</a> <a href="#term_Locality">cv:Locality</a> <a href="#term_Notes">cv:Notes</a> <a href="#term_URL">cv:URL</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_OtherInfo">
+<h3>Class: cv:OtherInfo</h3>
+<p><em>OtherInfo</em> - Other information in CV <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_hasOtherInfo">cv:hasOtherInfo</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_otherInfoType">cv:otherInfoType</a> <a href="#term_otherInfoDescription">cv:otherInfoDescription</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Person">
+<h3>Class: cv:Person</h3>
+<p><em>Person</em> - CV subclass of WordNet person <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_aboutPerson">cv:aboutPerson</a> <a href="#term_referenceBy">cv:referenceBy</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_gender">cv:gender</a> <a href="#term_birthPlace">cv:birthPlace</a> <a href="#term_hasCitizenship">cv:hasCitizenship</a> <a href="#term_hasNationality">cv:hasNationality</a> <a href="#term_maritalStatus">cv:maritalStatus</a> <a href="#term_noOfChildren">cv:noOfChildren</a> <a href="#term_hasDriversLicense">cv:hasDriversLicense</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_PersonalReference">
+<h3>Class: cv:PersonalReference</h3>
+<p><em>PersonalRefernece</em> - Personal reference <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_ProfessionalReference">
+<h3>Class: cv:ProfessionalReference</h3>
+<p><em>ProfessionalRefernece</em> - Professional reference <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Refernece">
+<h3>Class: cv:Refernece</h3>
+<p><em>Refernece</em> - CV entry for references <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_hasReference">cv:hasReference</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_referenceBy">cv:referenceBy</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Skill">
+<h3>Class: cv:Skill</h3>
+<p><em>Skill</em> - CV entry for description of skills <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_hasSkill">cv:hasSkill</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_skillName">cv:skillName</a> <a href="#term_skillLevel">cv:skillLevel</a> <a href="#term_skillLastUsed">cv:skillLastUsed</a> <a href="#term_skillYearsExperience">cv:skillYearsExperience</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Target">
+<h3>Class: cv:Target</h3>
+<p><em>Target</em> - CV information for target of job application.
+(Single entry per CV. May be defined in the properties of CV class instead). <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_hasTarget">cv:hasTarget</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_targetCareerLevel">cv:targetCareerLevel</a> <a href="#term_targetCompanyDescription">cv:targetCompanyDescription</a> <a href="#term_targetCompanyIndustry">cv:targetCompanyIndustry</a> <a href="#term_targetCompanySize">cv:targetCompanySize</a> <a href="#term_targetCountry">cv:targetCountry</a> <a href="#term_targetJobDescription">cv:targetJobDescription</a> <a href="#term_targetJobMode">cv:targetJobMode</a> <a href="#term_targetJobType">cv:targetJobType</a> <a href="#term_targetSalary">cv:targetSalary</a> <a href="#term_targetSalaryCurrency">cv:targetSalaryCurrency</a> <a href="#term_weeksNoticePeriod">cv:weeksNoticePeriod</a> <a href="#term_conditionWillRelocate">cv:conditionWillRelocate</a> <a href="#term_conditionWillTravel">cv:conditionWillTravel</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_WorkHistory">
+<h3>Class: cv:WorkHistory</h3>
+<p><em>WorkHistory</em> - CV entry for work history <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#term_hasWorkHistory">cv:hasWorkHistory</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#term_employedIn">cv:employedIn</a> <a href="#term_startDate">cv:startDate</a> <a href="#term_endDate">cv:endDate</a> <a href="#term_jobTitle">cv:jobTitle</a> <a href="#term_jobDescription">cv:jobDescription</a> <a href="#term_careerLevel">cv:careerLevel</a> <a href="#term_numSubordinates">cv:numSubordinates</a> <a href="#term_jobType">cv:jobType</a> <a href="#term_isCurrent">cv:isCurrent</a> </td></tr></table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Country">
+<h3>Property: cv:Country</h3>
+<p><em>Country</em> - Country where the company is located. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Organization">cv:Organization</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.daml.org/2001/09/countries/countries.daml#</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Industry">
+<h3>Property: cv:Industry</h3>
+<p><em>Industry</em> - Industry of the company <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Company">cv:Company</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Locality">
+<h3>Property: cv:Locality</h3>
+<p><em>Locality</em> - Region / state of the company. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Organization">cv:Organization</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Name">
+<h3>Property: cv:Name</h3>
+<p><em>Name</em> - Name of the company <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Organization">cv:Organization</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_Notes">
+<h3>Property: cv:Notes</h3>
+<p><em>Notes</em> - Notes about the company. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Organization">cv:Organization</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_URL">
+<h3>Property: cv:URL</h3>
+<p><em>URL</em> - Company home page <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Organization">cv:Organization</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_aboutPerson">
+<h3>Property: cv:aboutPerson</h3>
+<p><em>aboutPerson</em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_birthPlace">
+<h3>Property: cv:birthPlace</h3>
+<p><em>birthPlace</em> - Place of birth of the person. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_careerLevel">
+<h3>Property: cv:careerLevel</h3>
+<p><em>careerLevel</em> - Career level for the position in company. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#CVCareerLevel</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_conditionWillRelocate">
+<h3>Property: cv:conditionWillRelocate</h3>
+<p><em>conditionWillRelocate</em> - Is candidate willing to relocate? <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#BooleanValue</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_conditionWillTravel">
+<h3>Property: cv:conditionWillTravel</h3>
+<p><em>conditionWillTravel</em> - Is candidate willing to travel? <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#BooleanValue</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_courseDescription">
+<h3>Property: cv:courseDescription</h3>
+<p><em>courseDescription</em> - Description of the course / certification. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Course">cv:Course</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_courseFinishDate">
+<h3>Property: cv:courseFinishDate</h3>
+<p><em>courseFinishDate</em> - Date when course was finished / certification acquired. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Course">cv:Course</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_courseStartDate">
+<h3>Property: cv:courseStartDate</h3>
+<p><em>courseStartDate</em> - Start date of the course taken. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Course">cv:Course</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_courseTitle">
+<h3>Property: cv:courseTitle</h3>
+<p><em>courseTitle</em> - Title of the course taken or certification acquired. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Course">cv:Course</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_courseURL">
+<h3>Property: cv:courseURL</h3>
+<p><em>courseURL</em> - Web page of the courses taken / certification acquired. May be pointer to certification transcript. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Course">cv:Course</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_cvCopyright">
+<h3>Property: cv:cvCopyright</h3>
+<p><em>cvCopyright</em> - Copyright notice - who owns rights to CV, how may it be used, other legal info. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_cvDescription">
+<h3>Property: cv:cvDescription</h3>
+<p><em>cvDescription</em> - Text describing what the person wants to accomplish by this CV; what is s/he looking for; ... <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_cvIsActive">
+<h3>Property: cv:cvIsActive</h3>
+<p><em>cvIsActive</em> - If the CV is active and the person is actively looking for job opportunities. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_cvIsConfidential">
+<h3>Property: cv:cvIsConfidential</h3>
+<p><em>cvIsConfidential</em> - If the CV is confidential and may be used by receiving party only. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_cvTitle">
+<h3>Property: cv:cvTitle</h3>
+<p><em>cvTitle</em> - CV title. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_degreeType">
+<h3>Property: cv:degreeType</h3>
+<p><em>degreeType</em> - Type (title) of the degree. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Education">cv:Education</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#EduDegree</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_eduDescription">
+<h3>Property: cv:eduDescription</h3>
+<p><em>eduDescription</em> - Description of the education info. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Education">cv:Education</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_eduGradDate">
+<h3>Property: cv:eduGradDate</h3>
+<p><em>eduGradDate</em> - Education end (graducation) date (YYYY-MM-DD)
+May contain only year or year and month. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Education">cv:Education</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_eduMajor">
+<h3>Property: cv:eduMajor</h3>
+<p><em>eduMajor</em> - Major speciality graduated. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Education">cv:Education</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_eduMinor">
+<h3>Property: cv:eduMinor</h3>
+<p><em>eduMinor</em> - Minor speciality(-ies) graduated. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Education">cv:Education</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_eduStartDate">
+<h3>Property: cv:eduStartDate</h3>
+<p><em>eduStartDate</em> - Education start date (YYYY-MM-DD)
+May contain only year or year and month. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Education">cv:Education</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_employedIn">
+<h3>Property: cv:employedIn</h3>
+<p><em>employedIn</em> - The company where the person is/was employed. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Company">cv:Company</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_endDate">
+<h3>Property: cv:endDate</h3>
+<p><em>endDate</em> - End date of employment.
+Format: YYYY-MM-DD
+May containt only year or year and month. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_gender">
+<h3>Property: cv:gender</h3>
+<p><em>gender</em> - Gender property (man/woman) <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#SexProperty</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasCitizenship">
+<h3>Property: cv:hasCitizenship</h3>
+<p><em>hasCitizenship</em> - Person's citizenship. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.daml.org/2001/09/countries/countries.daml#</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasCourse">
+<h3>Property: cv:hasCourse</h3>
+<p><em>hasCourse</em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Course">cv:Course</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasDriversLicense">
+<h3>Property: cv:hasDriversLicense</h3>
+<p><em>hasDriversLicense</em> - Indicates if the person has drivers license (for regular cars). <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#BooleanValue</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasEducation">
+<h3>Property: cv:hasEducation</h3>
+<p><em>hasEducation</em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Education">cv:Education</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasNationality">
+<h3>Property: cv:hasNationality</h3>
+<p><em>hasNationality</em> - Person's nationality. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasOtherInfo">
+<h3>Property: cv:hasOtherInfo</h3>
+<p><em>hasOtherInfo</em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_OtherInfo">cv:OtherInfo</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasReference">
+<h3>Property: cv:hasReference</h3>
+<p><em>hasReference</em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Refernece">cv:Refernece</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasSkill">
+<h3>Property: cv:hasSkill</h3>
+<p><em>hasSkill</em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Skill">cv:Skill</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasTarget">
+<h3>Property: cv:hasTarget</h3>
+<p><em>hasTarget</em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_hasWorkHistory">
+<h3>Property: cv:hasWorkHistory</h3>
+<p><em>hasWorkHistory</em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_isCertification">
+<h3>Property: cv:isCertification</h3>
+<p><em>isCertification</em> - Does this course entry include certification? <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Course">cv:Course</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#BooleanValue</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_isCurrent">
+<h3>Property: cv:isCurrent</h3>
+<p><em>isCurrent</em> - Indicates if this is a current workplace. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#BooleanValue</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_jobDescription">
+<h3>Property: cv:jobDescription</h3>
+<p><em>jobDescription</em> - Description of the job in company. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_jobTitle">
+<h3>Property: cv:jobTitle</h3>
+<p><em>jobTitle</em> - Title in the company. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_jobType">
+<h3>Property: cv:jobType</h3>
+<p><em>jobType</em> - Type of the job: employee / contractor / intern <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#CVJobType</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_lastUpdate">
+<h3>Property: cv:lastUpdate</h3>
+<p><em>lastUpdate</em> - Date when the information in CV was last updated. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_CV">cv:CV</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_lngSkillLevelReading">
+<h3>Property: cv:lngSkillLevelReading</h3>
+<p><em>lngSkillLevelReading</em> - Reading level of language skill. (0..5) <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_languageSkill">cv:languageSkill</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_lngSkillLevelWritten">
+<h3>Property: cv:lngSkillLevelWritten</h3>
+<p><em>lngSkillLevelWritten</em> - Level of writing skills for language. (0..5) <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_languageSkill">cv:languageSkill</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_maritalStatus">
+<h3>Property: cv:maritalStatus</h3>
+<p><em>familyStatus</em> - Indicates person's marital status. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#MaritalStatus</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_noOfChildren">
+<h3>Property: cv:noOfChildren</h3>
+<p><em>noOfChildren</em> - Number of children the person has. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_numSubordinates">
+<h3>Property: cv:numSubordinates</h3>
+<p><em>numSubordinates</em> - Number of subordinates. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_organizedBy">
+<h3>Property: cv:organizedBy</h3>
+<p><em>organizedBy</em> - Organization that organized courses and/or provided certification. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Course">cv:Course</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Organization">cv:Organization</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_otherInfoDescription">
+<h3>Property: cv:otherInfoDescription</h3>
+<p><em>otherInfoDescription</em> - Description - content of misc CV information. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_OtherInfo">cv:OtherInfo</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_otherInfoType">
+<h3>Property: cv:otherInfoType</h3>
+<p><em>otherInfoType</em> - Type of other CV information (interests / awards / accomplishments / point of view / membership / social activities / other) <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_OtherInfo">cv:OtherInfo</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#OtherCVInfoType</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_referenceBy">
+<h3>Property: cv:referenceBy</h3>
+<p><em>referenceBy</em> - Points to a person who provides the reference. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Refernece">cv:Refernece</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_Person">cv:Person</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_skillLastUsed">
+<h3>Property: cv:skillLastUsed</h3>
+<p><em>skillLastUsed</em> - Date when skill was last used. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Skill">cv:Skill</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_skillLevel">
+<h3>Property: cv:skillLevel</h3>
+<p><em>skillLevel</em> - Level of the skill (0..5) <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Skill">cv:Skill</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_skillName">
+<h3>Property: cv:skillName</h3>
+<p><em>skillName</em> - Name of the skill <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Skill">cv:Skill</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_skillYearsExperience">
+<h3>Property: cv:skillYearsExperience</h3>
+<p><em>skillYearsExperience</em> - Year of experience in this skill. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Skill">cv:Skill</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_startDate">
+<h3>Property: cv:startDate</h3>
+<p><em>startDate</em> - Start date of employment.
+Format: YYYY-MM-DD
+May containt only year or year and month. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_WorkHistory">cv:WorkHistory</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_studiedIn">
+<h3>Property: cv:studiedIn</h3>
+<p><em>studiedIn</em> - Educational organization where person studied. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Education">cv:Education</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#term_EducationalOrg">cv:EducationalOrg</a></td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetCareerLevel">
+<h3>Property: cv:targetCareerLevel</h3>
+<p><em>targetCareerLevel</em> - Target career level. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#CVCareerLevel</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetCompanyDescription">
+<h3>Property: cv:targetCompanyDescription</h3>
+<p><em>targetCompanyDescription</em> - Description on the company where the candidate would like to work. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetCompanyIndustry">
+<h3>Property: cv:targetCompanyIndustry</h3>
+<p><em>targetCompanyIndustry</em> - Industry of the company where the candidate would like to work. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetCompanySize">
+<h3>Property: cv:targetCompanySize</h3>
+<p><em>targetCompanySize</em> - Size of the target company. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetCountry">
+<h3>Property: cv:targetCountry</h3>
+<p><em>targetCountry</em> - Country where would like to work.
+ <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.daml.org/2001/09/countries/countries.daml#</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetJobDescription">
+<h3>Property: cv:targetJobDescription</h3>
+<p><em>targetJobDescription</em> - Description of the job applicant is seeking. Notes. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetJobMode">
+<h3>Property: cv:targetJobMode</h3>
+<p><em>targetJobMode</em> - Job mode: full-time / part-time <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#CVJobMode</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetJobType">
+<h3>Property: cv:targetJobType</h3>
+<p><em>targetJobType</em> - Target job type. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://rdfs.org/resume-rdf/base.rdfs#CVJobType</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetSalary">
+<h3>Property: cv:targetSalary</h3>
+<p><em>targetSalary</em> - Target salary <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_targetSalaryCurrency">
+<h3>Property: cv:targetSalaryCurrency</h3>
+<p><em>targetSalaryCurrency</em> - Currency for target salary. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term_weeksNoticePeriod">
+<h3>Property: cv:weeksNoticePeriod</h3>
+<p><em>weeksNoticePeriod</em> - Notice period in weeks when can start to work. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#term_Target">cv:Target</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+
+<!-- end of termlist -->
+
+<h2><a name="sec-external" class="mozTocH2" id="sec-external"></a>External Classes and Properties</h2>
+<!--<p>Classes and properties from other ontologies can be used together with SIOC. During the SIOC ontology design process some external classes and properties were identified that are suitable for reuse. Such concepts are not included inside SIOC but are use directly together with terms from SIOC to describe the information on onlines community sites.</p>
+<p>This sections list the main external classes and properties that can be used with SIOC in a meaningful way. This list is not and can not be exhaustive because many RDF ontologies can be used together.</p>
+
+<div class="specterm">
+  <h3>Class: foaf:Person</h3>
+  <p>Used in SIOC to represent the information about a
+person who holds an account (sioc:User) on a Site. Account specific
+information is described by sioc:User - a subclass of
+foaf:OnlineAccount.</p>
+</div>
+<div class="specterm">
+  <h3>Class: skos:Concept</h3>
+  <p>May be used represent topics/tags defined on a community site. A sioc:topic property can be used to link a Post to a skos:Concept.</p>
+</div>
+
+<div class="specterm">
+  <h3>Property: dc:subject</h3>
+  <p>Keywords describing subject of a Post. See also: <a href="#term_topic">sioc:topic</a>.</p>
+</div>
+<div class="specterm">
+  <h3>Property: dc:title</h3>
+  <p>Title of the resource. Usually used to describe the title of a Post.</p>
+</div>
+<div class="specterm">
+  <h3>Property: dcterms:created</h3>
+  <p>A date/time when a resource was created. Usually used as a property of a Post.</p>
+</div>
+<div class="specterm">
+  <h3>Property: dcterms:modified</h3>
+  <p>A date/time when a resource was modified. Usually used as a property of a Post.</p>
+</div>
+<div class="specterm">
+  <h3>Property: foaf:holdsAccount</h3>
+  <p>Used to link foaf:Person to a sioc:User. See also: <a href="#term_account_of">sioc:account_of</a>.</p>
+</div>
+-->
+<p>Ontology namespaces referenced:</p>
+<table>
+  <tr><th>Prefix</th><th>XML Namespace</th><th>Specification</th></tr>
+  <tr>
+    <td>foaf</td>
+    <td>http://xmlns.com/foaf/0.1/</td>
+    <td><a href="http://xmlns.com/foaf/0.1/">Friend of a Friend (FOAF) Vocabulary</a></td>
+  </tr>
+</table>
+<hr/>
+
+<h2><a name="sec-reference" class="mozTocH2" id="sec-reference"></a>References</h2>
+<ul>
+  <li><a name="ref-rfc2119" id="ref-rfc2119"></a>[RFC 2119] S. Bradner,
+"Key words for use in RFCs to Indicate Requirement Levels," RFC 2119, Harvard University, March 1997. (<a
+href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.)</li>
+<li><a name="ref-rfc2396" id="ref-rfc2396"></a>[RFC 2396] T.Berners-Lee, et al, "Uniform Resource Identifiers
+(URI): Generic Syntax," RFC 2396, Internet Engineering Task Force, August 1998. (<a
+href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>.)</li>
+
+</ul>
+
+<h2><a name="sec-changes" class="mozTocH2" id="sec-changes"></a>Change Log</h2>
+<ul>
+  <li>2007-01-10: Initial version of the ResumeRDF Specification</li>
+</ul>
+
+<address><a href="mailto:uldis.bojars@deri.org">uldis.bojars@deri.org</a></address>
+
+</body>
+</html>
+<!-- specification regenerated at 21:01:03 01/11/07 GMT -->

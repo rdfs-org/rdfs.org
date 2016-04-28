@@ -1,0 +1,9 @@
+# Redirect all vocabularies over to vocab.deri.ie
+RewriteEngine On
+RewriteRule ^void-guide(.*) http://www.w3.org/TR/void$1 [R=301,L]
+RewriteRule ^void/rdf(.*) http://vocab.deri.ie/void.rdf$1 [R=302,L]
+RewriteRule ^void(.*) http://vocab.deri.ie/void$1 [R=302,L]
+RewriteRule ^scovo-plus/rdf(.*) http://vocab.deri.ie/scovo-plus.rdf$1 [R=302,L]
+RewriteRule ^scovo-plus(.*) http://vocab.deri.ie/scovo-plus$1 [R=302,L]
+RewriteRule ^rdforms/rdf(.*) http://vocab.deri.ie/rdforms.rdf$1 [R=302,L]
+RewriteRule ^rdforms(.*) http://vocab.deri.ie/rdforms$1 [R=302,L]

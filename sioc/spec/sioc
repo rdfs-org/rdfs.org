@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# wget -O sioc_template.html http://sparql.captsolo.net/sioc/SiocSpecTemplate?action=raw
+# dos2unix sioc_template.html
+
+#if [ ! -e "sioc.rdf" ]
+#then
+	wget -O sioc.rdf http://rdfs.org/sioc/ns
+#	wget -O sioc.rdf http://sw.deri.org/svn/sw/2005/08/sioc/ontology/ns.rdf
+#fi
+
+python specgen4.py file:sioc.rdf sioc_template.html > sioc.html
+
+if [ "$SIOC_COPY" == "true" ]; then
+	cp sioc*.html /var/www/html/spec/
+	#cp sioc.html ~/2007/05/submission/spec.html
+	#pushd ~/2007/05/submission/
+	#svn ci spec.html -m ""
+	#popd
+fi

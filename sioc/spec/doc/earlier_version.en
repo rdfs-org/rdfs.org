@@ -1,0 +1,7 @@
+<p>
+The earlier_version property links any sioc:Item to any earlier (i.e. older) version. This is a transitive property.
+<p>
+</p>
+The related non-transitive property, that links any sioc:Item to its immediately older version is previous_version.
+previous_version is a subproperty of earlier_version.
+</p>

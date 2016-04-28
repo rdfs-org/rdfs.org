@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY Ontology1265975763515 "http://www.semanticweb.org/ontologies/2010/1/Ontology1265975763515.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologies/2010/1/Ontology1265975763515.owl#"
+     xml:base="http://www.semanticweb.org/ontologies/2010/1/Ontology1265975763515.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:Ontology1265975763515="http://www.semanticweb.org/ontologies/2010/1/Ontology1265975763515.owl#">
+    <owl:Ontology rdf:about=""/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    <owl:Class rdf:about="#WikiDiscussionItem">
+    	<rdfs:label>Wiki Discussion Item</rdfs:label> 
+        <rdfs:comment>A single contribution to the discussion on a wiki Talk page.</rdfs:comment>	
+    </owl:Class>
+    
+    
+    <owl:Class rdf:about="ReferenceItem">
+    	<rdfs:label>Reference Item</rdfs:label> 
+    	<rdfs:subClassOf>WikiDiscussionItem</rdfs:subClassOf>
+    	<rdfs:comment>A WikiDiscussionItem that refers to something else.</rdfs:comment>	
+    </owl:Class>
+    
+
+    <owl:Class rdf:about="RequestItem">
+        <rdfs:label>Request Item</rdfs:label>
+    	<rdfs:subClassOf>WikiDiscussionItem</rdfs:subClassOf>
+    	<rdfs:comment>A WikiDiscussionItem that requests something.</rdfs:comment>	
+    </owl:Class>
+    
+
+    <owl:Class rdf:about="#RequestEditingCoordination">
+        <rdfs:subClassOf>RequestItem</rdfs:subClassOf>
+        <rdfs:label>Requests/suggestions for editing coordination</rdfs:label>
+        <rdfs:comment>Ideas, comments, or suggestions involving editing the article.</rdfs:comment>	
+    </owl:Class>
+    
+    
+    <owl:Class rdf:about="#ReferenceToGuidelinesOrPolicies">
+        <rdfs:subClassOf>ReferenceItem</rdfs:subClassOf>
+        <rdfs:label>References to guidelines and policies of this wiki.</rdfs:label>
+        <rdfs:comment></rdfs:comment>	
+    </owl:Class>
+    
+    
+    <owl:Class rdf:about="#RequestInfo">
+        <rdfs:subClassOf>RequestItem</rdfs:subClassOf>
+        <rdfs:label>Requests for information</rdfs:label>
+        <rdfs:comment>Questions asked by someone who does not intend to edit the page.</rdfs:comment>	
+    </owl:Class>
+    
+    
+    <owl:Class rdf:about="#ReferenceToInternalResources">
+        <rdfs:subClassOf>ReferenceItem</rdfs:subClassOf>                
+        <rdfs:label>References to internal resources of this wiki</rdfs:label>
+        <rdfs:comment>References to internal wiki resources such as diffs, Talk page discussions, old version of a page, etc.</rdfs:comment>	
+    </owl:Class>
+    
+
+    <owl:Class rdf:about="#ReferenceToEdit">
+        <rdfs:subClassOf>ReferenceItem</rdfs:subClassOf>
+        <rdfs:label>Reference to edits the discussant made</rdfs:label>
+        <rdfs:comment>Applied when an editor discusses his/her own article edits on the Talk page.</rdfs:comment>	
+    </owl:Class>
+    
+    
+    <owl:Class rdf:about="#RequestPeer-review">
+        <rdfs:subClassOf>RequestItem</rdfs:subClassOf>
+        <rdfs:label>Requests for peer review</rdfs:label>
+        <rdfs:comment>Viegas 2007 explains this category: "Users hoping to elevate articles to featured status may solicit a peer review."</rdfs:comment>	
+    </owl:Class>
+
+
+	<owl:Class rdf:about="#RequestHelpElsewhere">
+        <rdfs:subClassOf>RequestItem</rdfs:subClassOf>
+        <rdfs:label>Requests for help with another article, portal, etc.</rdfs:label>
+        <rdfs:comment>Recruiting editorial help in this Talk page for other pages (not this article), such as the article on another subject, a portal, WikiProject, etc.</rdfs:comment>	
+    </owl:Class>
+    
+
+    <owl:Class rdf:about="#ReferenceToRevertsOrControversialOrRemovedMaterial">
+        <rdfs:subClassOf>ReferenceItem</rdfs:subClassOf>
+        <rdfs:label>References to reverts, removed material, or controversial edits</rdfs:label>
+        <rdfs:comment>Discussions of reverts, removing material, or controversial edits.</rdfs:comment>	
+    </owl:Class>
+    
+    
+    <owl:Reference rdf:about="#ReferenceToSources">
+        <rdfs:subClassOf>ReferenceItem</rdfs:subClassOf>
+        <rdfs:label>References to sources outside Wiki</rdfs:label>
+        <rdfs:comment>References to sources, including print and deep web resources, outside this wiki.</rdfs:comment>	
+    </owl:Reference>
+    
+
+    <owl:Class rdf:about="#ReferenceToVandalism">
+        <rdfs:subClassOf>ReferenceItem</rdfs:subClassOf>
+        <rdfs:label>References to vandalism</rdfs:label>
+        <rdfs:comment>Mentions of vandalism or purported vandalism.</rdfs:comment>	
+    </owl:Class>
+    
+</rdf:RDF>

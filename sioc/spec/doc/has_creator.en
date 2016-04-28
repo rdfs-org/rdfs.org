@@ -1,0 +1,5 @@
+<p>
+The has_creator property links an Item to its author's UserAccount. Thus, we can follow the link from the Item to the creator and locate the other Items created by the same UserAccount. Being the creator of an Item is not a Role.
+</p><p>
+The community can be seen as a network of Items with UserAccounts linked to each Item, and there is also a network of other Items created by a given UserAccount stemming from there. We can use this information in community sites to locate more contributions by the given author.
+</p>

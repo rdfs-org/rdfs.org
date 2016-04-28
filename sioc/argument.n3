@@ -1,0 +1,181 @@
+# Note that namespace URIs must end with / or #
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix sioc_arg: <http://rdfs.org/sioc/argument#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+
+# These must be declared explicitly for OWL-DL conformity --Christoph Lange
+dc:creator
+	a	owl:AnnotationProperty .
+dc:description
+	a	owl:AnnotationProperty .
+dc:subject
+	a	owl:AnnotationProperty .
+dc:contributor
+	a	owl:AnnotationProperty .
+dc:title
+	a	owl:AnnotationProperty .
+
+sioc_arg:
+    a	owl:Ontology ;
+    dc:title "SIOC Argumentation Module" ;
+    dc:description "A SIOC module for expressing argumentative discussions in social media sites.  Any of the types declared here can be given as an additional type to a sioc:Item or sioc:Post." ;
+    # Who else should be mentioned here?  Or as dc:contributor?
+    dc:creator "Christoph Lange <ch.lange@jacobs-university.de>", "Uldis Bojārs <uldis.bojars@deri.org>", "Tudor Groza <tudor.groza@deri.org>" ;
+    dc:subject "Argumentation" ;
+    owl:versionInfo "0.1" .
+
+sioc_arg:Statement
+    a	owl:Class ;
+    # TODO should this be an rdfs:subClassOf something?
+    dc:description "A general statement.  Any statement, except an elaboration, can start an argumentative discussion." .
+
+sioc_arg:Issue
+    a	owl:Class ;
+    rdfs:subClassOf sioc_arg:Statement ;
+    dc:description "An issue that is argued about; can be in response to an idea (as a concern), or on its own" .
+    
+sioc_arg:Idea
+    a	owl:Class ;
+    rdfs:subClassOf sioc_arg:Statement ;
+    owl:disjointWith sioc_arg:Issue ;
+    dc:description "An idea that is argued about; can be in response to an issue (as a proposed solution), or on its own" .
+    
+sioc_arg:Elaboration
+    a	owl:Class ;
+    # We are not completely sure whether this should actually be a subclass of
+    # Statement; see
+    # http://workshop.sioc-project.org/wiki/SiocArgumentationModule/ElaborationStatement
+    rdfs:subClassOf sioc_arg:Statement ;
+    owl:disjointWith sioc_arg:Issue, sioc_arg:Idea ;
+    dc:description "An elaboration that follows up on a statement by adding more detail in the same line of argumentation.  An elaboration cannot start a discussion." .
+    
+sioc_arg:Decision
+    a	owl:Class ;
+    owl:disjointWith sioc_arg:Statement ;
+    dc:description "A decision on whether an idea should be accepted, or an issue resolved" .
+    
+sioc_arg:Argument
+    a	owl:Class ;
+    owl:disjointWith sioc_arg:Statement, sioc_arg:Decision ;
+    dc:description "An argument about a statement.  An argument tries to be objective." .
+    
+sioc_arg:Example
+    a	owl:Class ;
+    rdfs:subClassOf sioc_arg:Argument ;
+    dc:description "An argument by means of an example" .
+    
+sioc_arg:Evaluation
+    a	owl:Class ;
+    rdfs:subClassOf sioc_arg:Argument ;
+    owl:disjointWith sioc_arg:Example ;
+    dc:description "An argument supported by an evaluation" .
+    
+sioc_arg:Justification
+    a	owl:Class ;
+    rdfs:subClassOf sioc_arg:Argument ;
+    owl:disjointWith sioc_arg:Example, sioc_arg:Evaluation ;
+    dc:description "An argument that justifies the support or challenge of a statement" .
+    
+sioc_arg:Position
+    a	owl:Class ;
+    owl:disjointWith sioc_arg:Statement, sioc_arg:Decision, sioc_arg:Argument ;
+    dc:description "A (subjective) position, opinion, or vote on a statement or argument" .
+    
+sioc_arg:refers_to
+    a	owl:ObjectProperty ;	
+    rdfs:subPropertyOf sioc:reply_of ;
+    # really sioc:Item, or would we like a subclass of sioc:Item called
+    # sioc:ArgumentativeItem, which is a common superclass of all classed declared here?
+    rdfs:domain sioc:Item ;
+    rdfs:range sioc:Item ;
+    dc:description "Expresses that an item of an argumentative discussion follows up on another such item." .
+    
+sioc_arg:arises_from
+    a	owl:ObjectProperty ;	
+    rdfs:subPropertyOf sioc_arg:refers_to ;
+    rdfs:domain sioc_arg:Issue ;
+    rdfs:range sioc_arg:Idea ;
+    dc:description "The idea from which an issue arose, as a possible concern about the idea." .
+    
+sioc_arg:proposes_solution_for
+    a	owl:ObjectProperty ;
+    rdfs:subPropertyOf sioc_arg:refers_to ;
+    rdfs:domain sioc_arg:Idea ;
+    rdfs:range sioc_arg:Issue ;
+    dc:description "The issue which an idea proposes a solution for" .
+    
+sioc_arg:elaborates_on
+    a	owl:ObjectProperty ;	
+    rdfs:subPropertyOf sioc_arg:refers_to ;
+    rdfs:domain sioc_arg:Elaboration ;
+    # Changed from the SDoW08 paper.  Actually, one can elaborate on any
+    # statement, even on an elaboration. --Christoph
+    rdfs:range sioc_arg:Statement ;
+    dc:description "The statement on which this elaboration elaborates" .
+    
+sioc_arg:decides
+    a	owl:ObjectProperty ;	
+    rdfs:subPropertyOf sioc_arg:refers_to ;
+    rdfs:domain sioc_arg:Decision ;
+    rdfs:range [ owl:unionOf (sioc_arg:Issue sioc_arg:Idea) ] ;
+    dc:description "The issue or idea on which this decision was made" .
+    
+sioc_arg:supported_by
+    a	owl:ObjectProperty ;	
+    rdfs:subPropertyOf sioc_arg:refers_to ;
+    rdfs:domain sioc_arg:Decision ;
+    rdfs:range sioc_arg:Position ;
+    dc:description "The position(s) that support this decision" .
+    
+# Introduced this common superproperty for more clarity --Christoph
+sioc_arg:position_on
+    a	owl:ObjectProperty ;	
+    rdfs:subPropertyOf sioc_arg:refers_to ;
+    rdfs:domain sioc_arg:Position ;
+    # Note that we discourage positions on Elaborations
+    rdfs:range [ owl:unionOf (sioc_arg:Statement sioc_arg:Argument ) ] ;
+    dc:description "The statement or argument on which this position was given" .
+    
+sioc_arg:agrees_with
+    a	owl:ObjectProperty ;	
+    # rdfs:range and rdfs:domain inherited from the superproperty
+    rdfs:subPropertyOf sioc_arg:position_on ;
+    dc:description "Expresses that a position agrees with a statement or argument" .
+    
+sioc_arg:disagrees_with
+    a	owl:ObjectProperty ;	
+    # rdfs:range and rdfs:domain inherited from the superproperty
+    rdfs:subPropertyOf sioc_arg:position_on ;
+    dc:description "Expresses that a position disagrees with a statement or argument" .
+    
+sioc_arg:neutral_towards
+    a	owl:ObjectProperty ;	
+    # rdfs:range and rdfs:domain inherited from the superproperty
+    rdfs:subPropertyOf sioc_arg:position_on ;
+    dc:description "Expresses that a position is neutral towards a statement or argument" .
+    
+# Introduced this common superproperty for more clarity --Christoph
+sioc_arg:argues_on
+    a	owl:ObjectProperty ;	
+    rdfs:subPropertyOf sioc_arg:refers_to ;
+    rdfs:domain sioc_arg:Argument ;
+    # sioc_arg:Statement explicitly includes elaborations; more detailed
+    # arguments on elaborations make sense.
+    rdfs:range sioc_arg:Statement ;
+    dc:description "The statement on which this argument was given" .
+    
+sioc_arg:supports
+    a	owl:ObjectProperty ;	
+    # rdfs:range and rdfs:domain inherited from the superproperty
+    rdfs:subPropertyOf sioc_arg:argues_on ;
+    dc:description "Expresses that an argument supports a statement" .
+    
+sioc_arg:challenges
+    a	owl:ObjectProperty ;	
+    # rdfs:range and rdfs:domain inherited from the superproperty
+    rdfs:subPropertyOf sioc_arg:argues_on ;
+    dc:description "Expresses that an argument challenges a statement" .

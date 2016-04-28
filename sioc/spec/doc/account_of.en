@@ -1,0 +1,3 @@
+<p>
+Links a sioc:UserAccount to a <a href="http://xmlns.com/foaf/0.1/#term_Person">foaf:Person</a> whom it belongs to. The reverse direction - i.e. linking a foaf:Person to a UserAccount that it owns or holds - can be described using the <a href="http://xmlns.com/foaf/0.1/#term_account">foaf:account</a> property.
+</p>

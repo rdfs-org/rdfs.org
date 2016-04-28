@@ -1,0 +1,17 @@
+<p>
+A topic definition applies to most of the concepts defined in this ontology, and topic metadata can be a useful way to match documents and people to each other.
+</p><p>
+While it may be more difficult to require a UserAccount to assign a topic to an Item or Post at creation time, it is more likely that a Container will have an associated topic or set of topics that can be propagated to the Items it contains. Similarly, UserAccounts or Usergroups can define topics of interest when their profiles are created or modified.
+</p><p>
+In order to enable the location of related information between the community sites, a common categorisation system has to be used. On large-scale general-interest community sites, topics may be quite broad and a general categorisation system such as the <a href="http://dmoz.org/">DMOZ</a> category hierarchy may be used.
+</p>
+<pre>:post_123 a sioc:Post ; 
+    sioc:topic &lt;http://dmoz.org/Business/Publishing_and_Printing/&gt; .
+&lt;http://dmoz.org/Business/Publishing_and_Printing/&gt; rdfs:label "Publishing and Printing" .</pre>
+<p>
+On specialised sites, which may have a very specific category hierarchy, generic categorisation systems are not suitable because they are too broad and may not have the necessary level of detail. For these sites, the category hierarchy may be defined in the <a href="http://www.w3.org/2004/02/skos/">SKOS framework</a> and mappings between these concepts and a common category system may be created.
+</p><p>
+A proper use of topics can lead to many interesting scenarios in community sites. For example, a person has defined certain topics of interest on registering a UserAccount, after which Forums matching those topics are suggested to the UserAccount owner. The UserAccount subscribes to some of these Forums, and makes Posts on these and other Forums. The Forums now associated with this UserAccount will have certain topics that can be used for purposes of social networking or automatic community creation.
+</p><p>
+This property is often used to express the information about categories or tags assigned to a Post or Item. The <a href="#sec-modules-types">SIOC Types Ontology Module</a> allows one to further specify what type of topic it is using the classes sioc_t:Category and sioc_t:Tag. 
+</p>

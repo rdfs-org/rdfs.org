@@ -1,0 +1,7 @@
+<p>
+Whereas a foaf:Person can hold multiple e-mail addresses, a sioc:UserAccount is usually associated with a primary e-mail address represented using sioc:email or sioc:email_sha1.
+</p>
+
+<p>
+Unlike foaf:mbox / foaf:mbox_sha1sum for foaf:Person, this property is not an inverse functional property as one e-mail address can be associated with multiple unique sioc:UserAccounts that should not be smushed together.
+</p>

@@ -1,0 +1,5 @@
+<p>
+Container is a high-level concept used to group content Items together. The relationships between a Container and the Items that belong to it are described using sioc:container_of and sioc:has_container properties. A hierarchy of Containers can be defined in terms of parents and children using sioc:has_parent and sioc:parent_of.
+</p><p>
+Subclasses of Container can be used to further specify typed groupings of Items in online communities. Forum, a subclass of Container and one of the core classes in SIOC, is used to describe an area on a community Site (e.g., a forum or weblog) on which Posts are made. The <a href="#sec-modules-types">SIOC Types Ontology Module</a> contains additional, more specific subclasses of sioc:Container.
+</p>

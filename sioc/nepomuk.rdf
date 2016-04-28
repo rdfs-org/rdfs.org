@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1"
+>
+
+<owl:Ontology rdf:about="http://FIXME/NAME" rdf:type="http://www.w3.org/2002/07/owl#Thing">
+  <dcterms:title>Mappings between Nepomuk and Web ontologies</dcterms:title>
+  <dcterms:description>This document defines a set of mappings between terms from the Nepomuk Ontologies (PIMO, NAO, etc.) and popular ontologies on the Web (FOAF, SIOC, etc.)</dcterms:description>
+  <foaf:maker rdf:resource="http://apassant.net/alex"/>
+  <dcterms:contributor rdf:resource="http://www.deri.ie/about/team/member/Laura_Dragan#me" />
+  <dcterms:contributor rdf:resource="http://www.deri.ie/about/team/member/Todor_Groza#me" />
+</owl:Ontology>
+
+<!-- Mappings between classes -->
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/11/01/pimo#Note">
+  <rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/11/01/pimo#Person">
+  <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/11/01/pimo#Project">
+  <rdfs:subClassOf rdf:resource="http://usefulinc.com/ns/doap#Project"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/11/01/pimo#City">
+  <rdfs:subClassOf rdf:resource="http://www.geonames.org/ontology#Feature"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://freedesktop.org/standards/xesam/1.0/core#Music">
+  <rdfs:subClassOf rdf:resource="http://purl.org/ontology/mo/MusicalWork"/>
+</rdf:Description>
+
+<!-- Mappings between properties -->
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/08/15/nao#prefLabel">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/08/15/nao#created">
+  <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/created"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/08/15/nao#lastModified">
+  <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/modified"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/11/01/pimo#isRelated">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/> 
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/03/22/nco#fullname">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#related_to"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/03/22/nco#nameGiven">
+  <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/givenname"/> 
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/03/22/nco#nameFamily">
+  <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/family_name"/> 
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/03/22/nco#hasEmailAddress">
+  <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/mbox"/> 
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.semanticdesktop.org/ontologies/2007/08/15/nao#hasTag">
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#topic"/> 
+</rdf:Description>
+
+</rdf:RDF>

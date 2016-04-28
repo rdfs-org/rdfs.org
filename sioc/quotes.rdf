@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:wot="http://xmlns.com/wot/0.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:quotes="http://rdfs.org/sioc/quotes#"
+>
+
+<!-- Ontology definition -->
+
+<owl:Ontology rdf:about="http://rdfs.org/sioc/quotes#">
+	<dcterms:title xml:lang="en">SIOC Extension for modeling quotes in conversations</dcterms:title>
+	<dcterms:description xml:lang="en">Extends the SIOC Core Ontology to model quotes in online conversations.</dcterms:description>
+	<rdfs:seeAlso rdf:resource="http://rdfs.org/sioc/spec/#sec-modules"/>
+	<foaf:maker rdf:resource="http://apassant.net/alex"/>
+	<foaf:maker rdf:resource="http://zimmer.aprilfoolsreview.com/antoine#me"/>
+	<!-- SIOC Import (Needed for inference) -->
+	<owl:imports rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:Ontology>
+
+<!-- Classes -->
+
+<owl:Class rdf:about="http://rdfs.org/sioc/quotes#Block">
+	<rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/Item"/>
+	<rdfs:comment xml:lang="en">A citation block in an online conversation item</rdfs:comment>
+	<rdfs:label xml:lang="en">Block</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="http://rdfs.org/sioc/quotes#Quote">
+	<rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/Item"/>
+	<rdfs:comment xml:lang="en">A quoted text part in a citation block</rdfs:comment>
+	<rdfs:label xml:lang="en">Quote</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="http://rdfs.org/sioc/quotes#Response">
+	<rdfs:subClassOf rdf:resource="http://rdfs.org/sioc/Item"/>
+	<rdfs:comment xml:lang="en">A response block in citation block</rdfs:comment>
+	<rdfs:label xml:lang="en">Response</rdfs:label>
+</owl:Class>
+
+<!-- Properties -->
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/quotes#has_block">
+	<rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+	<rdfs:range rdf:resource="http://rdfs.org/sioc/quotes#Block"/>
+	<rdfs:comment xml:lang="en">A link from an item to a citation block</rdfs:comment>
+	<rdfs:label xml:lang="en">has block</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/quotes#has_quote">
+	<rdfs:domain rdf:resource="http://rdfs.org/sioc/quotes#Block"/>
+	<rdfs:range rdf:resource="http://rdfs.org/sioc/quotes#Quote"/>
+	<rdfs:comment xml:lang="en">A link from an citation block to its quote part</rdfs:comment>
+	<rdfs:label xml:lang="en">has quote</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/quotes#has_response">
+	<rdfs:domain rdf:resource="http://rdfs.org/sioc/quotes#Block"/>
+	<rdfs:range rdf:resource="http://rdfs.org/sioc/quotes#Response"/>
+	<rdfs:comment xml:lang="en">A link from an citation block to its response part</rdfs:comment>
+	<rdfs:label xml:lang="en">has response</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/quotes#block_of">
+	<rdfs:comment xml:lang="en">A link from a citation block to its containing item</rdfs:comment>
+	<rdfs:label xml:lang="en">block of</rdfs:label>
+	<owl:inverseOf rdf:resource="http://rdfs.org/sioc/quotes#has_block"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/quotes#quote_of">
+	<rdfs:comment xml:lang="en">A link from a quote to its citation block</rdfs:comment>
+	<rdfs:label xml:lang="en">quote of</rdfs:label>
+	<owl:inverseOf rdf:resource="http://rdfs.org/sioc/quotes#has_quote"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/quotes#response_of">
+	<rdfs:comment xml:lang="en">A link from a response part to its citation block</rdfs:comment>
+	<rdfs:label xml:lang="en">response of</rdfs:label>
+	<owl:inverseOf rdf:resource="http://rdfs.org/sioc/quotes#has_response"/>
+</owl:ObjectProperty>
+
+<!-- 
+Various OWL2 axioms used to enrich knowledge bases using the current model
+OWL2 is pretty awesome, actually :-)
+-->
+
+<!--
+The following axiom is used to define the rule
+{ ?x quotes:has_quote ?q ; quotes:has_response ?r } => { ?q sioc:has_reply ?r }
+i.e. in a block, the "response" element is a reply of the "quote" element
+We have to deal with inverse properties to create such axiom, i.e.
+{ ?q quotes:quoted_of?x . ?x quotes:has_response ?r } => { ?q sioc:has_reply ?r }
+However, in OWL 2, it is not necessary to name the inverse explicitly. Instead, we just use the owl:inverseOf construct in the property chain axiom
+-->
+
+<rdf:Description rdf:about="http://rdfs.org/sioc/ns#has_reply">
+	<owl:propertyChain rdf:parseType="Collection">
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#quote_of"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_response"/>
+	</owl:propertyChain>
+</rdf:Description>
+
+<!-- 
+The following axiom is used to define the rule
+{ ?c sioc:creator_of [ quotes:has_block [ quotes:has_response ?r ] ] . } => { ?c sioc:creator_of ?r }
+i.e. the author of the response part of a block is the same as the author of the item that contains this block.
+Note, in addition, that we can then query this data using has_creator since creator_of and has_creator are defined as inverse in the SIOC Core Ontology. So this axiom together with the SIOC axioms also imply the rule:
+{ ?r sioc:has_creator [] ; quotes:has_block [ quotes:has_response ?r ]  . } => { ?r sioc:has_creator ?c }
+-->
+
+<rdf:Description rdf:about="http://rdfs.org/sioc/ns#creator_of">
+	<owl:propertyChain rdf:parseType="Collection">
+		<rdf:Description rdf:about="http://rdfs.org/sioc/ns#creator_of"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_block"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_response"/>
+	</owl:propertyChain>
+</rdf:Description>
+
+<!-- 
+The following axiom is used to define the rule
+{ ?c sioc:creator_of [ sioc:has_reply [ quotes:has_block [ quotes:has_quote ?q ] ] . } => { ?c sioc:creator_of ?q }
+i.e. the author of the quote part of a block is the same as the author of the item that is replied to the one that contains the block - probably better to understand by looking at the schemas !
+Again, this also implies a similar chain using sioc:has_creator instead of sioc:creator_of.
+-->
+
+<rdf:Description rdf:about="http://rdfs.org/sioc/ns#creator_of">
+	<owl:propertyChain rdf:parseType="Collection">
+		<rdf:Description rdf:about="http://rdfs.org/sioc/ns#creator_of"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/ns#has_reply"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_block"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_quote"/>
+	</owl:propertyChain>
+</rdf:Description>
+
+<!-- 
+The following axiom is used to directly link a post to the response blocks from other emails
+-->
+
+<!--
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/quotes#has_reply_block_response">
+	<owl:propertyChain rdf:parseType="Collection">
+		<rdf:Description rdf:about="http://rdfs.org/sioc/ns#has_reply"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_block"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_response"/>
+	</owl:propertyChain>
+</owl:ObjectProperty>
+
+-->
+
+<!-- 
+The following axiom is used to directly link a post to the quote blocks from other emails
+-->
+
+<!--
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/quotes#has_reply_block_quote">
+	<owl:propertyChain rdf:parseType="Collection">
+		<rdf:Description rdf:about="http://rdfs.org/sioc/ns#has_reply"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_block"/>
+		<rdf:Description rdf:about="http://rdfs.org/sioc/quotes#has_quote"/>
+	</owl:propertyChain>
+</owl:ObjectProperty>
+
+-->
+
+<!-- 
+
+Random data to check entailment with the previous axioms
+
+<sioc:Item rdf:about="http://example.org/email">
+	<sioc:has_creator rdf:resource="http://example.org/alice"/>
+</sioc:Item>
+
+<sioc:Item rdf:about="http://example.org/email_reply">
+	<sioc:reply_of rdf:resource="http://example.org/email"/>
+	<sioc:has_creator rdf:resource="http://example.org/bob"/>
+	<quotes:has_block rdf:resource="http://example.org/block"/>
+</sioc:Item>
+
+<sioc:Item rdf:about="http://example.org/block">
+	<quotes:has_quote rdf:resource="http://example.org/quote"/>
+	<quotes:has_reply rdf:resource="http://example.org/reply"/>
+</sioc:Item>
+
+-->
+
+</rdf:RDF>

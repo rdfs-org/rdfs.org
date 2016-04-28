@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# wget -O scot_template.html http://sparql.captsolo.net/scot/SiocSpecTemplate?action=raw
+# dos2unix scot_template.html
+
+#if [ ! -e "scot.rdf" ]
+#then
+	wget -O scot.rdf http://rdfs.org/scot/ns
+#	wget -O scot.rdf http://sw.deri.org/svn/sw/2005/08/scot/ontology/ns.rdf
+#fi
+
+python specgen4.py file:scot.rdf scot_template.html > scot.html
+
+if [ "$SIOC_COPY" == "true" ]; then
+	cp scot*.html /var/www/html/spec/
+	#cp scot.html ~/2007/05/submission/spec.html
+	#pushd ~/2007/05/submission/
+	#svn ci spec.html -m ""
+	#popd
+fi

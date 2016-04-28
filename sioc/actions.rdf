@@ -1,0 +1,169 @@
+<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!--     using base file:///home/pa/recherche/deri/sioca.bzr/sioca.ttl-->
+
+
+<rdf:RDF xmlns="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+    <Class rdf:about="http://rdfs.org/sioc/actions#Action">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+        <comment xml:lang="en">
+A timestamped event involving a user and a number of digital artifacts.
+    </comment>
+        <label xml:lang="en">Action</label>
+
+        <label xml:lang="fr">Action</label>
+        <subClassOf rdf:resource="http://rdfs.org/sioc/ns#Event"/>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <comment xml:lang="en">Every action has exactly one creator.</comment>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:cardinality>
+            <owl:onProperty rdf:resource="http://rdfs.org/sioc/ns#has_creator"/>
+
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <comment xml:lang="en">Every action has at least one object.</comment>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://rdfs.org/sioc/actions#object"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <comment xml:lang="en">Every action has at least one object.</comment>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:minCardinality>
+            <owl:onClass rdf:resource="http://rdfs.org/sioc/ns#Instant"/>
+            <owl:onProperty rdf:resource="http://rdfs.org/sioc/actions#object"/>
+        </subClassOf>
+    </Class>
+
+    <Class rdf:about="http://rdfs.org/sioc/actions#DigitalArtifact">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+        <comment xml:lang="en">
+Anything that can be the object of an Action.
+    </comment>
+        <label xml:lang="fr">Artefact numérique</label>
+        <label xml:lang="en">Digital Artifact</label>
+    </Class>
+
+    <rdf:Property rdf:about="http://rdfs.org/sioc/actions#byproduct">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <comment xml:lang="en">
+A digital artifact created by the action as a side-effect.
+    </comment>
+        <label xml:lang="en">byproduct</label>
+        <label xml:lang="fr">sous-produit</label>
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#creates"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:about="http://rdfs.org/sioc/actions#creates">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <comment xml:lang="en">
+A digital artifact that was brought into existence by the action.
+    </comment>
+        <label xml:lang="en">creates</label>
+        <label xml:lang="fr">crée</label>
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#object"/>
+
+        <subClassOf rdf:resource="http://rdfs.org/sioc/ns#product"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:about="http://rdfs.org/sioc/actions#deletes">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <comment xml:lang="en">
+A digital artifact whose existence is ended by the action.
+    </comment>
+        <label xml:lang="en">deletes</label>
+        <label xml:lang="fr">détruit</label>
+
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#object"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:about="http://rdfs.org/sioc/actions#modifies">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <comment xml:lang="en">
+A digital artifact significantly altered by the action.
+    </comment>
+        <label xml:lang="fr">modifie</label>
+        <label xml:lang="en">modifies</label>
+
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#uses"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:about="http://rdfs.org/sioc/actions#object">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <comment xml:lang="en">
+Any digital artifact involved in the action.
+    </comment>
+        <domain rdf:resource="http://rdfs.org/sioc/actions#Action"/>
+        <label xml:lang="en">object</label>
+
+        <label xml:lang="fr">objet</label>
+        <range rdf:resource="http://rdfs.org/sioc/actions#DigitalArtifact"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:about="http://rdfs.org/sioc/actions#product">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <comment xml:lang="en">
+A digital artifact which the action directly intended to produce.
+    </comment>
+        <label xml:lang="en">product</label>
+
+        <label xml:lang="fr">produit</label>
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#creates"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:about="http://rdfs.org/sioc/actions#source">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <comment xml:lang="en">
+Associated to the creates property; a digital artifact that was used to produce
+the created artifact.
+    </comment>
+        <label xml:lang="en">source</label>
+
+        <label xml:lang="fr">source</label>
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#uses"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:about="http://rdfs.org/sioc/actions#uses">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <comment xml:lang="en">
+A digital artifact involved by the action, existing before and after it.
+    </comment>
+        <label xml:lang="en">uses</label>
+
+        <label xml:lang="fr">utilise</label>
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#object"/>
+        <skos:related rdf:resource="http://rdfs.org/sioc/ns#factor"/>
+    </rdf:Property>
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#Container">
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#DigitalArtifact"/>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#Item">
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#DigitalArtifact"/>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#Role">
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#DigitalArtifact"/>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#Space">
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#DigitalArtifact"/>
+
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#UserAccount">
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#DigitalArtifact"/>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://rdfs.org/sioc/ns#Usergroup">
+        <subClassOf rdf:resource="http://rdfs.org/sioc/actions#DigitalArtifact"/>
+    </rdf:Description>
+</rdf:RDF>
+
+

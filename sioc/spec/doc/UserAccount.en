@@ -1,0 +1,10 @@
+<p>
+<b>Please note that User was recently deprecated in favour of UserAccount.</b>
+</p>
+<p>
+A UserAccount is an online account of a member of an online community. It is connected to Items and Posts that a UserAccount creates or edits, to Containers and Forums that it is subscribed to or moderates and to Sites that it administers. UserAccounts can be grouped for purposes of allowing access to certain Forums or enhanced community site features (weblogs, webmail, etc.).
+</p><p>
+A <a href="http://xmlns.com/foaf/0.1/#term_Person">foaf:Person</a> will normally hold a registered UserAccount on a Site (through the property foaf:account), and will use this account to create content and interact with the community. The foaf:Person can hold multiple sioc:UserAccounts.
+</p><p>
+sioc:UserAccount describes properties of an online account, and is used in combination with a foaf:Person (using the property sioc:account_of) which describes information about the individual themselves.
+</p>

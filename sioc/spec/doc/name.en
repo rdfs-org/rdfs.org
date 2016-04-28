@@ -1,0 +1,3 @@
+<p>
+The name property is used to assign a name to various SIOC objects.  For example, it may be username of a UserAccount, the name of a Usergroup, the name given to a role (e.g. Moderator, Registered User), etc.
+</p>

@@ -1,0 +1,5 @@
+<p>
+A Post is an article or message posted by a UserAccount to a Forum. A series of Posts may be threaded if they share a common subject and are connected by reply or by date relationships. Posts will have content and may also have attached files, which can be edited or deleted by the Moderator of the Forum that contains the Post.
+</p><p>
+The <a href="#sec-modules-types">SIOC Types Ontology Module</a> describes some additional, more specific subclasses of sioc:Post.
+</p>

@@ -1,0 +1,3 @@
+<p>
+The has_discussion property links any sioc:Item to a related discussion. The discussion can be anything, for instance a sioc:Forum, a sioct:WikiArticle or simply a foaf:Document.
+</p>

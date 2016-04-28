@@ -1,0 +1,5 @@
+<p>
+Item is a high-level concept for container items. It has subclasses that further specify different types of Items. One of these subclasses (which plays an important role in SIOC) is sioc:Post, used to describe articles or messages created within online community Sites. The <a href="#sec-modules-types">SIOC Types Ontology Module</a> describes additional, more specific subclasses of sioc:Item.
+</p><p>
+Items can be contained within Containers.
+</p>

@@ -1,0 +1,3 @@
+<p>
+Mailing lists, forums and blogs on community sites usually employ some threaded discussion methods, whereby discussions are initialised by a certain user and replied to by others.  The Thread container is used to group Posts from a single discussion thread together via the sioc:container_of property, especially where a sioc:has_reply / reply_of structure is absent.
+</p>

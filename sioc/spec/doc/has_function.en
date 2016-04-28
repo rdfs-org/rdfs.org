@@ -1,0 +1,3 @@
+<p>
+Links a UserAccount to a Role that this UserAccount has (it is a function of this UserAccount). UserAccounts can have many different Roles in different Forums. 
+</p>

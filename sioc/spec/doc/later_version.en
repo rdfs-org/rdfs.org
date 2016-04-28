@@ -1,0 +1,7 @@
+<p>
+The later_version property links any sioc:Item to any later (i.e. newer) version. This is a transitive property.
+<p>
+</p>
+The related non-transitive property, that links any sioc:Item to its immediately newer version is next_version.
+next_version is a subproperty of later_version.
+</p>

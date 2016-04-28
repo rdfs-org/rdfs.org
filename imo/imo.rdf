@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:scovo="http://purl.org/NET/scovo#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+>
+
+<!-- Ontology definition -->
+
+<owl:Ontology rdf:about="http://rdfs.org/imo/ns#">
+	<dcterms:title xml:lang="en">The Interest Mining Ontology</dcterms:title>
+	<dcterms:description xml:lang="en">An ontology to represent mined user-profiles in RDF.</dcterms:description>
+	<foaf:maker rdf:resource="http://apassant.net/alex"/>
+	<foaf:maker rdf:resource="http://sw.deri.org/~sheila/foaf.rdf#me"/>
+	<foaf:maker rdf:resource="http://www.johnbreslin.com/foaf/foaf.rdf#me"/>
+</owl:Ontology>
+
+<!-- Classes -->
+
+<owl:Class rdf:about="http://rdfs.org/imo/ns#MinedInterest">
+	<rdfs:comment xml:lang="en">An user interest mined from online sources</rdfs:comment>
+	<rdfs:label xml:lang="en">Mined Interest</rdfs:label>
+</owl:Class>
+
+<!-- Properties -->
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/imo/ns#person">
+	<rdfs:domain rdf:resource="http://rdfs.org/imo/ns#MinedInterest"/>
+	<rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+	<rdfs:comment xml:lang="en">A link from a mined interest to the related person</rdfs:comment>
+	<rdfs:label xml:lang="en">person</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/imo/ns#interest">
+	<rdfs:domain rdf:resource="http://rdfs.org/imo/ns#MinedInterest"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:comment xml:lang="en">A link from a mined interest to the interest itself</rdfs:comment>
+	<rdfs:label xml:lang="en">interest</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/imo/ns#statItem">
+	<rdfs:domain rdf:resource="http://rdfs.org/imo/ns#MinedInterest"/>
+	<rdfs:range rdf:resource="http://purl.org/NET/scovo#Item"/>
+	<rdfs:comment xml:lang="en">A link from a mined interest to statistics about itself</rdfs:comment>
+	<rdfs:label xml:lang="en">stat item</rdfs:label>
+</owl:ObjectProperty>
+
+<!-- Instances -->
+
+<scovo:Dimension rdf:about="http://rdfs.org/imo/ns#ExplicitMining">
+	<rdfs:comment xml:lang="en">An explicitly mined user interest</rdfs:comment>
+	<rdfs:label xml:lang="en">explicit mining</rdfs:label>
+</scovo:Dimension>
+
+<scovo:Dimension rdf:about="http://rdfs.org/imo/ns#ImplicitMining">
+	<rdfs:comment xml:lang="en">An implicitly mined user interest</rdfs:comment>
+	<rdfs:label xml:lang="en">implicit mining</rdfs:label>
+</scovo:Dimension>
+
+<!-- Relationships with FOAF using an OWL2 Property Chain Axiom -->
+
+<rdf:Description rdf:about="http://xmlns.com/foaf/0.1/topic_interest">
+	<owl:propertyChainAxiom rdf:parseType="Collection">
+		<rdf:Description rdf:about="http://rdfs.org/imo/ns#interest"/>
+		<rdf:Description>
+		 	<owl:inverseOf rdf:resource="http://rdfs.org/imo/ns#person"/>
+		</rdf:Description>
+	</owl:propertyChainAxiom>
+</rdf:Description>
+
+</rdf:RDF>

@@ -1,0 +1,4 @@
+Run the following to export imo.rdf from svn (file may be removed first)
+
+svn export  https://subversion.deri.ie/boardslinks/imo.rdf
+

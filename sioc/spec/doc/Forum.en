@@ -1,0 +1,7 @@
+<p>
+Forums can be thought of as channels or discussion area on which Posts are made. A Forum can be linked to the Site that hosts it. Forums will usually discuss a certain topic or set of related topics, or they may contain discussions entirely devoted to a certain community group or organisation. A Forum will have a moderator who can veto or edit posts before or after they appear in the Forum.
+</p><p>
+Forums may have a set of subscribed UserAccounts who are notified when new Posts are made. The hierarchy of Forums can be defined in terms of parents and children, allowing the creation of structures conforming to topic categories as defined by the Site administrator. Examples of Forums include mailing lists, message boards, Usenet newsgroups and weblogs.
+</p><p>
+The <a href="#sec-modules-types">SIOC Types Ontology Module</a> defines come more specific subclasses of sioc:Forum.
+</p>

@@ -1,0 +1,5 @@
+<p>
+The has_reply property links an Item to other follow-up content Items made on the same topic.  Use of this property can result in a single branch of replies from the original Item, or in a tree-like structure with branches forking at different Items along the way.
+</p><p>
+For example, in Forums such as mailing lists, message boards, etc., has_reply will be used to link a starter Post to any Post that is made in response to the original message.  Also, has_reply can be used to connect any type of content Item (images, videos, etc.) to any Item or text Post that is made in response. 
+</p>

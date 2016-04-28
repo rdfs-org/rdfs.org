@@ -1,0 +1,7 @@
+<p>
+A recent development in online discussion methods is an article or Item that appears in multiple places, or has been copied from one Container to another relevant Container. In SIOC, we can treat these copies of Items as siblings of each other if we think of the Items as non-identical twins that share most characteristics but differ in some manner.
+</p><p>
+<em>For example, a post is created on one blog and categorized with the topic "TV", but has been copied to another blog with multiple topics such as "Sci-Fi" or "Arts".</em>
+</p><p>
+In the creation of siblings, the new sibling instance will be fully self-describing but will have a number of changed properties (in the example, has_container and topic would change). A sibling might also be a version of a post in another language.
+</p>

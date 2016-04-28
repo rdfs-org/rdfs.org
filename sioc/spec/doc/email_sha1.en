@@ -1,0 +1,3 @@
+<p>
+Remember to include the "mailto:" prefix, but no trailing whitespace, when computing a sioc:email_sha1 property.
+</p>

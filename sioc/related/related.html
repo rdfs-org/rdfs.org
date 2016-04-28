@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>SIOC Ontology: Related Ontologies and RDF Vocabularies</title>
+  <link href="img/xmlns-style.css" rel="stylesheet" type="text/css" />
+  <link href="img/style.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+  pre {
+    border: 1px dashed #000;
+    padding: 1em;
+    background: #ddd;
+  }
+  p.issue {
+    font-weight: bold;
+    color: #f00;
+  }
+  </style>
+</head>
+
+<body>
+
+<h1 id="title">SIOC Ontology: Related Ontologies and RDF Vocabularies</h1>
+
+<h2>11 April 2008</h2>
+
+<dl>
+  <dt>This version:</dt>
+  <dd><a href="http://rdfs.org/sioc/related/">http://rdfs.org/sioc/related/</a></dd>
+  <dt>Latest version:</dt>
+  <dd><a href="http://rdfs.org/sioc/related/">http://rdfs.org/sioc/related/</a></dd>
+</dl>
+
+<dl>
+<dt>Editors:</dt>
+  <dd><a href="http://captsolo.net/" title="Uldis Bojārs">Uldis Bojārs</a> - <a href="http://www.deri.ie/" title="Digital Enterprise Research Institute">DERI, NUI Galway</a></dd>
+  <dd><a href="http://www.johnbreslin.com/" title="John G. Breslin">John G. Breslin</a> - <a href="http://www.deri.ie/" title="Digital Enterprise Research Institute">DERI, NUI Galway</a></dd>
+  <dd><a href="http://apassant.net/" title="Alexandre Passant">Alexandre Passant</a> - <a href="http://www.lalic.paris4.sorbonne.fr" title="LaLIC at Universit&eacute; Paris-Sorbonne (Paris IV)">LaLIC at Universit&eacute; Paris-Sorbonne</a></dd>
+  <dd><a href="http://www.polleres.net/" title="Axel Polleres">Axel Polleres</a> - <a href="http://www.deri.ie/" title="Digital Enterprise Research Institute">DERI, NUI Galway</a></dd>
+</dl>
+
+<p class="copyright">Copyright &copy; 2006-2008 by <a href="http://www.deri.ie/">DERI Galway</a> at the <a href="http://www.nuigalway.ie/">National University of Ireland, Galway</a>, Ireland.</p>
+
+<p>Development of SIOC is supported by <a href="http://www.sfi.ie/">Science Foundation Ireland</a> under grant number SFI/02/CE1/I131.</p>
+
+<a href="http://creativecommons.org/licenses/by/1.0/"><img alt="Creative Commons License" style="border: 0pt none ; float: right;" src="img/somerights.gif" /></a>
+
+<p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/1.0/">Creative Commons License</a>. This copyright applies to the <em>SIOC Ontology: Related Ontologies and RDF Vocabularies</em> and accompanying documentation and does not apply to SIOC data formats, ontology terms, or technology.</p>
+
+<a href="http://validator.w3.org/check/referer"><img src="img/valid-xhtml10" style="float: right;" alt="Valid XHTML 1.0!" height="31" width="88"/> </a>
+
+<p>Regarding underlying technology, SIOC relies heavily on W3C's <a href="http://www.w3.org/RDF/">RDF</a> technology, an open Web standard that can be freely used by anyone.</p>
+
+<hr />
+
+<h2 id="abstract">Abstract</h2>
+
+<p>The SIOC (Semantically-Interlinked Online Communities) Core Ontology provides the main concepts and properties required to describe information from online communities (e.g., message boards, wikis, weblogs, etc.) on the Semantic Web. This document contains a brief description of the relationship between SIOC and other selected relevant ontologies or vocabularies.</p>
+
+<h2 id="status">Status of this document</h2>
+
+<p><strong>NOTE:</strong> <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document.</em></p>
+
+<p>Authors welcome suggestions on the <a href="http://rdfs.org/sioc/ns#">SIOC Core Ontology Namespace</a> and this document. Please send comments to the <a href="http://groups.google.com/group/sioc-dev">SIOC developers' mailing list</a> (SIOC-Dev), <a href="http://groups.google.com/group/sioc-dev/topics">public archives</a> are available. This document may be updated or added to based on implementation experience, but no commitment is made by the authors regarding future updates.</p>
+
+<h2 id="toc">Table of contents</h2>
+<ul>
+  <li><a href="#introduction">1. Introduction</a>
+    <ul>
+      <li><a href="#notation">1.1 Terminology and notation</a></li>
+    </ul>
+  </li>
+  <li><a href="#dublincore">2. Dublin Core</a>
+    <ul>
+      <li><a href="#dublincore-link">2.1. Linking to and reusing Dublin Core</a></li>
+      <li><a href="#dublincore-example">2.2. Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#foaf">3. FOAF</a>
+    <ul>
+      <li><a href="#foaf-link">3.1. Linking to and reusing FOAF</a></li>
+      <li><a href="#foaf-sioc">3.2. Using both FOAF and SIOC</a></li>
+      <li><a href="#foaf-example">3.3. Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#rss">4. RSS 1.0</a>
+    <ul>
+      <li><a href="#rss-link">4.1. Linking to and reusing RSS</a></li>
+      <li><a href="#rss-example">4.2. Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#skos">5. SKOS</a>
+    <ul>
+      <li><a href="#skos-link">5.1. Linking to and reusing SKOS</a></li>
+      <li><a href="#skos-example">5.2. Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#other">6. Other ontologies</a>
+    <ul>
+      <li><a href="#other-example">6.1. Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#sample">7. Sample sioc:Post</a>
+  </li>
+  <li><a href="#conclusion">8. Conclusion and future work</a>
+  </li>
+  <li><a href="#namespaces">9. Ontology namespaces referenced</a>
+  </li>
+  <!--
+  <li><a href="#sec-external">External classes and properties</a>
+  </li>
+  -->
+  <li><a href="#reference">10. References</a>
+  </li>
+  <li><a href="#changelog">11. Change log</a>
+  </li>
+</ul>
+
+<h2 id="introduction">1. Introduction</h2>
+
+<p>SIOC aims to incorporate and reuse existing vocabularies as far as possible in order to avoid redundancies and to enable the use of richer metadata descriptions for specific domains. In this document, we outline concrete relations to other existing RDF vocabularies and describe overlaps with SIOC terms.</p>
+
+<p>This document refers to version 1.28 of the <a class="http" href="http://rdfs.org/sioc/ns#">SIOC Core Ontology Namespace</a> from 11 April 2008.</p>
+
+<h3 id="notation">1.1. Terminology and Notation</h3>
+
+<p>The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#ref-rfc2119">RFC 2119</a>.</p>
+
+<p>Namespace URIs of the general form "http://www.example.com/" represent some application-dependent or context-dependent URI as defined in <a href="#ref-rfc2396">RFC 2396</a>.</p>
+
+<h2 id="dublincore">2. Dublin Core</h2>
+
+<p>The <a class="http" href="http://dublincore.org/">Dublin Core Metadata Initiative</a> (DCMI) provides a basic set of properties and types for annotating documents.</p>
+
+<h3 id="dublincore-link">2.1. Linking to and reusing Dublin Core</h3>
+
+<p>SIOC has many hooks to Dublin Core. Posts, Forums, and other SIOC terms can be annotated with particular information about coverage, creation, etc. using <a class="http" href="http://purl.org/dc/terms/">dcterms</a> for describing properties such as creation date (dcterms:created), modification date (dcterms:modified), parts (dcterms:hasPart / dcterms:isPartOf), title (dcterms:title), and subject keywords (dcterms:subject), thereby deprecating proprietary properties in earlier versions of SIOC. Also, content types of sioc:attachment(s) can be further specified via <a class="http" href="http://dublincore.org/2006/08/28/dctype.rdf#">DCMI Types</a>, and sioc:avatar can have resources of type <a class="http" href="http://dublincore.org/2006/08/28/dctype.rdf#Image">dctype:Image</a>.</p>
+
+<h3 id="dublincore-example">2.2. Example</h3>
+
+<p>Describing some sioc:Post properties using Dublin Core:</p>
+
+<pre>
+&lt;sioc:Post rdf:about="http://example.org/blog/2006/08/09/104-sample-post"&gt;
+    &lt;dcterms:title&gt;Sample Post&lt;/dcterms:title&gt;
+    &lt;dcterms:created&gt;2006-08-03T22:50:32Z&lt;/dcterms:created&gt;
+    &lt;dcterms:modified&gt;2006-09-19T23:36:05Z&lt;/dcterms:modified&gt;
+    &lt;dcterms:subject&gt;Paris, France&lt;/dcterms:subject&gt;
+    [...]
+&lt;/sioc:Post&gt;
+</pre>
+
+<h2 id="foaf">3. FOAF</h2>
+
+<p>The <a class="http" href="http://xmlns.com/foaf/0.1/">FOAF</a> vocabulary specifies the most important features related to people acting in online communities. The vocabulary allows us to specify properties about people commonly appearing on personal homepages, and to describe links between people who know each other.</p>
+
+<h3 id="foaf-link">3.1. Linking to and reusing FOAF</h3>
+
+<p>The sioc:User concept is a subclass of the foaf:OnlineAccount concept, so linking a sioc:User to a foaf:Person can be done using the foaf:holdsAccount property (or in the reverse direction using sioc:account_of). By means of this link, one can refer further to properties of the real person behind a user. Note that a sioc:User can also be related to a foaf:Agent and its subclass foaf:Group, so that a group of people can share a common account.</p>
+
+<h3 id="foaf-sioc">3.2. Using both FOAF and SIOC</h3>
+
+<p>When linking a sioc:Post to its creator, two options are offered:</p>
+
+<ul>
+  <li>The first one is to use a "sioc:Post sioc:has_creator sioc:User" statement.</li>
+  <li>The second one is to use a "sioc:Post foaf:maker foaf:Person" statement.</li>
+</ul>
+
+<p>Even if the second statement could be inferred from the first one (using the foaf:holdsAccount property), we suggest that exporters use both, and use only the foaf:maker statement when describing a post created by a non-registered user (e.g., a blog comment).</p>
+
+<h3 id="foaf-example">3.3. Example</h3>
+
+<p>Using both FOAF and SIOC for a post / creator relationship:</p>
+
+<pre>
+&lt;sioc:Post rdf:about="http://example.org/blog/2006/08/09/104-sample-post"&gt;
+    &lt;dcterms:title&gt;Sample Post&lt;/dcterms:title&gt;
+    &lt;dcterms:created&gt;2006-08-03T22:50:32Z&lt;/dcterms:created&gt;
+    &lt;sioc:has_creator&gt;
+        &lt;sioc:User rdf:about="http://example.org/blog/#bob"&gt;
+            &lt;rdfs:seeAlso rdf:resource="http://example.org/blog/sioc.php?type=user&amp;amp;user_id=bob"/&gt;
+        &lt;/sioc:User&gt;
+    &lt;/sioc:has_creator&gt;
+    &lt;foaf:maker&gt;
+        &lt;foaf:Person rdf:about="http://example.org/blog/#foaf_bob"&gt;
+            &lt;rdfs:seeAlso rdf:resource="http://example.org/blog/sioc.php?type=user&amp;amp;user_id=bob"/&gt;
+        &lt;/foaf:Person&gt;
+    &lt;/foaf:maker&gt;
+[...]
+&lt;/sioc:Post&gt;
+</pre>
+
+<h2 id="rss">4. RSS 1.0</h2>
+
+<p><a class="http" href="http://web.resource.org/rss/1.0/schema.rdf">RDF Site Summary</a>, also known as "Really Simple Syndication", is a web content syndication format used to describe lists (so called channels) of news items via syndicated feeds, very similar to how forum entries are treated in SIOC. While there is an RDF format developed by the RSS-Dev group, <a class="http" href="http://web.resource.org/rss/1.0/">RSS 1.0</a> (which we refer to here), nowadays the XML format <a class="http" href="http://cyber.law.harvard.edu/rss/rss.html">RSS 2.0</a>, released in 2003 through Harvard under a Creative Commons license, is more widely adopted and is supported by all major browsers or special feed readers.</p>
+
+<h3 id="rss-link">4.1. Linking to and reusing RSS</h3>
+
+<p>SIOC exceeds RSS somewhat in terms of its expressivity for the content found in online communities, but RSS terms are very useful for reuse in SIOC due to their wide usage and support (especially RSS 2.0).</p>
+
+<p>SIOC also encourages the use of the <a class="http" href="http://web.resource.org/rss/1.0/modules/content/">RSS 1.0 Content Module</a>, using content:encoded for describing the rich content of a sioc:Post, while sioc:content is used for a plain text rendering.</p>
+
+<h3 id="rss-example">4.2. Example</h3>
+
+<p>Using both sioc:content and content:encoded (from the RSS 1.0 Content Module) to display the content of a sioc:Post:</p> 
+
+<pre>
+&lt;sioc:Post rdf:about="http://example.org/blog/2006/08/09/104-sample-post"&gt;
+    &lt;dcterms:title&gt;Sample Post&lt;/dcterms:title&gt;
+    &lt;dcterms:created&gt;2006-08-03T22:50:32Z&lt;/dcterms:created&gt;
+    &lt;content:encoded&gt;&lt;![CDATA[&lt;p&gt;This is a &lt;b&gt;sample post&lt;/b&gt;&lt;/p&gt;]]&gt;&lt;/content:encoded&gt;
+    &lt;sioc:content&gt;This is a sample post&lt;/sioc:content&gt;
+    [...]
+&lt;/sioc:Post&gt;
+</pre>
+
+<h2 id="skos">5. SKOS</h2>
+
+<p><a class="http" href="http://www.w3.org/2004/02/skos">SKOS</a>, a W3C Working Draft, is developing specifications and standards to support the use of knowledge organisation systems (KOS) such as thesauri, classification schemes, subject heading lists, taxonomies, other types of controlled vocabulary, as well as terminologies and glossaries, within the framework of the Semantic Web.</p>
+
+<h3 id="skos-link">5.1. Linking to and reusing SKOS</h3>
+
+<p>SIOC recommends that sioc:topic(s) link to categories defined in a SKOS category hierarchy.</p>
+
+<h3 id="skos-example">5.2. Example</h3>
+
+<p>Linking a sioc:Post to a SKOS concept defined for Paris:</p>
+
+<pre>
+&lt;sioc:Post rdf:about="http://example.org/blog/2006/08/09/104-sample-post"&gt;
+    &lt;dcterms:title&gt;Sample Post&lt;/dcterms:title&gt;
+    &lt;dcterms:created&gt;2006-08-03T22:50:32Z&lt;/dcterms:created&gt;
+    &lt;sioc:topic&gt;
+        &lt;skos:Concept rdf:about="http://example.org/skos/concepts#Paris"&gt;
+            &lt;skos:prefLabel xml:lang="fr"&gt;Paris&lt;/skos:prefLabel&gt;
+            &lt;skos:prefLabel xml:lang="en"&gt;Paris&lt;/skos:prefLabel&gt;
+        &lt;/skos:Concept&gt;
+	&lt;/sioc:topic&gt;        
+    [...]
+&lt;/sioc:Post&gt;
+</pre>
+
+<h2 id="other">6. Other ontologies</h2>
+
+<p>SIOC can also link sioc:Post(s) to any ontology instances or classes using the sioc:topic property in order to define what the topic of a Post is.</p>
+
+<h3 id="other-example">6.1. Example</h3>
+
+<p>Linking a sioc:Post to the geonames.org instance for Paris:</p>
+
+<pre>
+&lt;sioc:Post rdf:about="http://example.org/blog/2006/08/09/104-sample-post"&gt;
+    &lt;dcterms:title&gt;Sample Post&lt;/dcterms:title&gt;
+    &lt;dcterms:created&gt;2006-08-03T22:50:32Z&lt;/dcterms:created&gt;
+    &lt;sioc:topic&gt;
+        &lt;geoname:Feature rdf:about="http://sws.geonames.org/2988507/"&gt;
+            &lt;rdfs:seeAlso rdf:resource="http://sws.geonames.org/2988507/about.rdf"/&gt;
+        &lt;geoname:Feature&gt;
+    &lt;/sioc:topic&gt;
+[...]
+&lt;/sioc:Post&gt;
+</pre>
+
+<h2 id="sample">7. Sample sioc:Post</h2>
+
+<p>Here is the complete sample document used for the examples in this document, using a number of different ontologies within a single sioc:Post definition: </p>
+
+<pre>
+&lt;sioc:Post rdf:about="http://example.org/blog/2006/08/09/104-sample-post"&gt;
+    &lt;dcterms:title&gt;Sample Post&lt;/dcterms:title&gt;
+    &lt;dcterms:created&gt;2006-08-03T22:50:32Z&lt;/dcterms:created&gt;
+    &lt;dcterms:modified&gt;2006-09-19T23:36:05Z&lt;/dcterms:modified&gt;
+    &lt;dcterms:subject&gt;Paris, France&lt;/dcterms:subject&gt;
+    &lt;sioc:has_creator&gt;
+        &lt;sioc:User rdf:about="http://example.org/blog/#bob"&gt;
+            &lt;rdfs:seeAlso rdf:resource="http://example.org/blog/sioc.php?type=user&amp;amp;user_id=bob"/&gt;
+        &lt;/sioc:User&gt;
+    &lt;/sioc:has_creator&gt;
+    &lt;foaf:maker&gt;
+        &lt;foaf:Person rdf:about="http://example.org/blog/#foaf_bob"&gt;
+            &lt;rdfs:seeAlso rdf:resource="http://example.org/blog/sioc.php?type=user&amp;amp;user_id=bob"/&gt;
+        &lt;/foaf:Person&gt;
+    &lt;/foaf:maker&gt;
+    &lt;content:encoded&gt;&lt;![CDATA[&lt;p&gt;This is a &lt;b&gt;sample post&lt;/b&gt;&lt;/p&gt;]]&gt;&lt;/content:encoded&gt;
+    &lt;sioc:content&gt;This is a sample post&lt;/sioc:content&gt;
+    &lt;sioc:topic&gt;
+        &lt;skos:Concept rdf:about="http://example.org/skos/concepts#Paris"&gt;
+            &lt;skos:prefLabel xml:lang="fr"&gt;Paris&lt;/skos:prefLabel&gt;
+            &lt;skos:prefLabel xml:lang="en"&gt;Paris&lt;/skos:prefLabel&gt;
+        &lt;/skos:Concept&gt;
+    &lt;/sioc:topic&gt;
+    &lt;sioc:topic&gt;
+        &lt;geoname:Feature rdf:about="http://sws.geonames.org/2988507/"&gt;
+            &lt;rdfs:seeAlso rdf:resource="http://sws.geonames.org/2988507/about.rdf"/&gt;
+        &lt;/geoname:Feature&gt;
+    &lt;/sioc:topic&gt;
+&lt;/sioc:Post&gt;
+</pre>
+
+<h2 id="conclusion">8. Conclusion and future work</h2>
+
+<p>In this document, we discussed some important related vocabularies. The <a class="http" href="http://www.rdfweb.org/topic/ExpertFinder">ExpertFinder Initiative</a> plans to further investigate overlaps and correlations between existing RDF vocabularies as future work.</p>
+
+<p>A related topic is the creation of machine-readable definitions for describing how ontologies could optionally be <a href="http://wiki.sioc-project.org/w/SuggestedOntologiesOntology">used with each other</a>, for example: suggesting external properties that can be used with local domain or range classes (plus external ones if required); suggesting external classes (and local ones if required) that could be used as the domain or range for local properties; providing sample RDF instance data for such suggestions, etc.</p>
+
+<p>As there are some incompatibilities between RDFS and OWL DL (e.g., there exists a validation conflict when defining the sioc:topic object property as a subtype of the dcterms:subject datatype property), we also recommend that future OWL working groups should examine any such incompatibilities and also issue some best practices on how to address these when combining RDFS and OWL DL ontologies.</p> 
+
+<h2 id="namespaces">9. Ontology namespaces referenced</h2>
+
+<table style="border: 1px solid black;" cellpadding="5" cellspacing="0" width="100%%">
+  <tr><th>Prefix</th><th>XML Namespace</th><th>Specification</th></tr>
+  <tr>
+    <td>aowl</td>
+    <td>http://bblfish.net/work/atom-owl/2006-06-06/AtomOwl.rdf</td>
+    <td><a href="http://bblfish.net/work/atom-owl/2006-06-06/AtomOwl.html">AtomOwl Vocabulary Specification</a></td>
+  </tr>
+  <tr>
+    <td>content</td>
+    <td>http://purl.org/rss/1.0/modules/content/</td>
+    <td><a href="http://web.resource.org/rss/1.0/modules/content/">RSS 1.0 Content Module</a></td>
+  </tr>
+  <tr>
+    <td>dcterms</td>
+    <td>http://purl.org/dc/terms/</td>
+    <td><a href="http://dublincore.org/documents/dcmi-terms/#H3">Dublin Core Metadata Terms</a></td>
+  </tr>
+  <tr>
+    <td>foaf</td>
+    <td>http://xmlns.com/foaf/0.1/</td>
+    <td><a href="http://xmlns.com/foaf/0.1/">Friend of a Friend (FOAF) Vocabulary</a></td>
+  </tr>
+  <tr>
+    <td>sioc</td>
+    <td>http://rdfs.org/sioc/ns#</td>
+    <td><a href="http://rdfs.org/sioc/ns#">SIOC Core Ontology</a></td>
+  </tr>
+  <tr>
+    <td>skos</td>
+    <td>http://www.w3.org/2004/02/skos/core#</td>
+    <td><a href="http://www.w3.org/2004/02/skos/core#">SKOS Core Vocabulary</a></td>
+  </tr>
+</table>
+
+<hr />
+
+<h2 id="reference">10. References</h2>
+
+<ul>
+  <li><a name="ref-rfc2119" id="ref-rfc2119"></a>[RFC 2119] S. Bradner,
+"Key words for use in RFCs to Indicate Requirement Levels", RFC 2119, Harvard University, March 1997, <a
+href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>.</li>
+  <li><a name="ref-rfc2396" id="ref-rfc2396"></a>[RFC 2396] T. Berners-Lee et al., "Uniform Resource Identifiers
+(URI): Generic Syntax", RFC 2396, Internet Engineering Task Force, August 1998, <a
+href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</a>.</li>
+</ul>
+
+<h2 id="changelog">11. Change log</h2>
+
+<ul>
+  <li>2006-10-12: Initial version of this document.</li>
+  <li>2006-10-22: Added part on other ontologies and various examples.</li>
+  <li>2007-06-12: Revisions for rdfs.org.</li>
+  <li>2008-04-11: Merged dc into dcterms.</li>
+</ul>
+
+<address><a href="mailto:uldis.bojars@deri.org">uldis.bojars@deri.org</a></address>
+<address><a href="mailto:john.breslin@deri.org">john.breslin@deri.org</a></address>
+
+</body>
+
+</html>

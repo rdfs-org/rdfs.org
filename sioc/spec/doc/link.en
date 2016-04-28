@@ -1,0 +1,5 @@
+<p>
+Links to a URI of a document where this SIOC object is located. Usually sioc:link is not needed because it can be assigned directly as a URI of this SIOC object. It is recommended that its usage is limited only to those cases where a document's URI may not be assigned to the object itself.
+</p><p>
+For example, this may occur in a page that contains a number of objects (e.g., comments to a blog post) that can not be addressed individually.
+</p>
