@@ -1,0 +1,2 @@
+AddType text/rdf .rdf
+AddType application/x-xpinstall .xpi
