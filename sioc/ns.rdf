@@ -365,6 +365,7 @@ This information can be used to export information from online communities and t
   <rdfs:comment xml:lang="en">The Site that hosts this Container.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Container"/>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Site"/>
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#has_space"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -466,6 +467,7 @@ This information can be used to export information from online communities and t
   <rdfs:comment xml:lang="en">A Container that is hosted on this Site.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Site"/>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Container"/>
+  <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#space_of"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
