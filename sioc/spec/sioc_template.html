@@ -15,7 +15,7 @@
 
 <h1>SIOC Core Ontology Specification</h1>
 
-<h2>25 March 2010</h2>
+<h2>28 February 2018</h2>
 
 <dl>
   <dt>This version:</dt>
@@ -23,12 +23,12 @@
   <dt>Latest version:</dt>
   <dd><a href="http://rdfs.org/sioc/spec/">http://rdfs.org/sioc/spec/</a></dd>
   <dt>Last update:</dt>
-  <dd>Date: 2010/03/25 09:09:09</dd>
+  <dd>Date: 2018/02/28 18:02:28</dd>
   <dt>Revision:</dt>
   <dd>$VersionInfo$</dd>
   <dt>Editors:</dt>
-  <dd><a href="http://captsolo.net/" title="Uldis Bojārs">Uldis Bojārs</a> - <a href="http://www.deri.ie/" title="Digital Enterprise Research Institute">DERI, NUI Galway</a><br />
-  <a href="http://www.johnbreslin.org/" title="John G. Breslin">John G. Breslin</a> - <a href="http://www.deri.ie/" title="Digital Enterprise Research Institute">DERI</a> and the <a href="http://www.nuigalway.ie/engineering/">School of Engineering and Informatics</a>, <a href="http://www.nuigalway.ie/">NUI Galway</a></dd>
+  <dd><a href="http://captsolo.net/" title="Uldis Bojārs">Uldis Bojārs</a> - <a href="https://www.lu.lv/">University of Latvia</a><br />
+  <a href="http://www.johnbreslin.org/" title="John G. Breslin">John G. Breslin</a> - <a href="http://datascienceinstitute.ie/">Data Science Institute</a>, <a href="http://www.nuigalway.ie/">NUI Galway</a></dd>
   <dt>Authors:</dt>
   <dd><a href="http://www.berrueta.net/">Diego Berrueta</a> - <a href="http://www.fundacionctic.org/">Fundación CTIC</a></dd>
   <dd><a href="http://danbri.org/" title="Dan Brickley">Dan Brickley</a> - <a href="http://www.asemantics.com/">Asemantics S.R.L.</a></dd>
@@ -47,9 +47,9 @@
   <dd>See <a href="#sec-ack">acknowledgements</a>.</dd>
 </dl>
 
-<p class="copyright">Copyright &copy; 2004-2010 by <a href="http://www.deri.ie/">DERI</a>, <a href="http://www.nuigalway.ie/">NUI Galway</a>.</p>
+<p class="copyright">Copyright &copy; 2004-2018 by <a href="http://www.datascienceinstitute.ie/">Data Science Institute</a> (formerly DERI), <a href="http://www.nuigalway.ie/">NUI Galway</a>.</p>
 
-<p>Development of SIOC has been supported by <a href="http://www.sfi.ie/">Science Foundation Ireland</a> under grant numbers SFI/02/CE1/I131 and SFI/08/CE/I1380.</p>
+<p>Development of SIOC has been supported by <a href="http://www.sfi.ie/">Science Foundation Ireland</a> under grant numbers SFI/02/CE1/I131, SFI/08/CE/I1380 and SFI/12/RC/2289.</p>
 
 <a href="http://creativecommons.org/licenses/by/1.0/"><img alt="Creative Commons License" style="border: 0pt none ; float: right;" src="img/somerights.gif" /></a>
 
@@ -133,8 +133,14 @@
 <ul>
   <li><a href="http://rdfs.org/sioc/ns#">http://rdfs.org/sioc/ns#</a> - SIOC Core Ontology Namespace</li>
   <li><a href="http://rdfs.org/sioc/access#">http://rdfs.org/sioc/access#</a> - SIOC Access Ontology Module Namespace</li>
-  <li><a href="http://rdfs.org/sioc/types#">http://rdfs.org/sioc/types#</a> - SIOC Types Ontology Module Namespace</li>
+  <li><a href="http://rdfs.org/sioc/actions#">http://rdfs.org/sioc/actions#</a> - SIOC Actions Ontology Module Namespace</li>
+  <li><a href="http://rdfs.org/sioc/argument#">http://rdfs.org/sioc/argument#</a> - SIOC Argumentation Ontology Module Namespace</li>
+  <li><a href="http://rdfs.org/sioc/nepomuk#">http://rdfs.org/sioc/nepomuk#</a> - SIOC-Nepomuk Ontology Mappings</li>
+  <li><a href="http://rdfs.org/sioc/quotes#">http://rdfs.org/sioc/quotes#</a> - SIOC Quotes Ontology Module Namespace</li>
   <li><a href="http://rdfs.org/sioc/services#">http://rdfs.org/sioc/services#</a> - SIOC Services Ontology Module Namespace</li>
+  <li><a href="http://rdfs.org/sioc/swan#">http://rdfs.org/sioc/swan#</a> - SIOC-SWAN Ontology Mappings</li>
+  <li><a href="http://rdfs.org/sioc/types#">http://rdfs.org/sioc/types#</a> - SIOC Types Ontology Module Namespace</li>
+  <li><a href="http://rdfs.org/sioc/wikitalk#">http://rdfs.org/sioc/wikitalk#</a> - SIOC WikiTalk Ontology Module Namespace</li>
 </ul>
 
 <div class="glance">
@@ -209,11 +215,11 @@
 <p>SIOC documents may use other existing ontologies to enrich the information described. Additional information about the creator of the post can be described using the <a href="http://xmlns.com/foaf/0.1/">FOAF Vocabulary</a>. Rich content of the post (e.g., HTML representation) can be described using <a href="http://bblfish.net/work/atom-owl/2006-06-06/AtomOwl.html">AtomOwl</a> or the <a href="http://web.resource.org/rss/1.0/modules/content/">RSS 1.0
 Content Module</a>. For more information on classes and properties from other vocabularies that are often used together with SIOC, see the section on <a href="#sec-external">external classes and properties</a>.</p>
 
-<p>You can see a full SIOC profile of the example blog post which uses FOAF for personal information and the RSS 1.0 Content Module for rich content: (a) <a href="http://johnbreslin.com/blog/index.php?sioc_type=post&amp;sioc_id=517">in RDF/XML</a>; (b) <a href="http://sparql.captsolo.net/browser/browser.py?url=http%%3A//johnbreslin.com/blog/index.php%%3Fsioc_type%%3Dpost%%26sioc_id%%3D517">rendered in a SIOC Browser</a>. This profile is generated by the <a href="http://sioc-project.org/wordpress/">WordPress SIOC export plugin</a>.</p>
+<!-- <p>You can see a full SIOC profile of the example blog post which uses FOAF for personal information and the RSS 1.0 Content Module for rich content: (a) <a href="http://johnbreslin.com/blog/index.php?sioc_type=post&amp;sioc_id=517">in RDF/XML</a>; (b) <a href="http://sparql.captsolo.net/browser/browser.py?url=http%%3A//johnbreslin.com/blog/index.php%%3Fsioc_type%%3Dpost%%26sioc_id%%3D517">rendered in a SIOC Browser</a>. This profile is generated by the <a href="http://sioc-project.org/wordpress/">WordPress SIOC export plugin</a>.</p> -->
 
 <h3><a name="sec-background" id="sec-background"></a>3.2. Background</h3>
 
-<p>SIOC is managed as a collaborative effort amongst members of the <a href="http://sw.deri.ie/">Semantic Web Cluster</a> at <a href="http://www.deri.ie/">DERI</a>, <a href="http://www.nuigalway.ie/">NUI Galway</a> (funded by <a href="http://www.sfi.ie/">SFI</a>) and Semantic Web developers on the <a href="http://groups.google.com/group/sioc-dev">SIOC developers' mailing list</a> (SIOC-Dev). The name "SIOC" is an acronym for "Semantically-Interlinked Online Communities", and is coincidentally the Irish word for "frost".</p>
+<p>SIOC is managed as a collaborative effort amongst members of the <a href="http://socialsemantics.org/">Unit for Social Semantics</a> at the <a href="http://www.datascienceinstitute.ie/">Data Science Institute</a>, <a href="http://www.nuigalway.ie/">NUI Galway</a> (funded by <a href="http://www.sfi.ie/">SFI</a>) and Semantic Web developers on the <a href="http://groups.google.com/group/sioc-dev">SIOC developers' mailing list</a> (SIOC-Dev). The name "SIOC" is an acronym for "Semantically-Interlinked Online Communities", and is coincidentally the Irish word for "frost".</p>
 
 <p>More resources on SIOC are available on the <a href="http://sioc-project.org/">SIOC Project page</a>.</p>
 
@@ -225,9 +231,9 @@ Content Module</a>. For more information on classes and properties from other vo
 
 <p>Related publications:</p>
 <ul>
-  <li>J.G. Breslin, A. Harth, U. Bojars, S. Decker, "<a class="small" href="http://www.springerlink.com/openurl.asp?genre=article&amp;issn=0302-9743&amp;volume=3532&amp;spage=500">Towards Semantically-Interlinked Online Communities</a>", Proceedings of the 2nd European Semantic Web Conference (ESWC '05), LNCS vol. 3532, pp. 500-514, Heraklion, Greece, 2005.</li>
-  <li>U. Bojars, J.G. Breslin, A. Passant, "<a href="http://sw.deri.org/~jbreslin/publications/20061003_btr_2006.pdf">SIOC Browser - Towards a Richer Blog Browsing Experience</a>", The 4th Blogtalk Conference (Blogtalk Reloaded), Vienna, Austria, October 2006.</li>
-  <li>For more SIOC-related publications, see the <a href="http://sioc-project.org/publications/">publications</a> page.</li>
+  <li>J.G. Breslin, A. Harth, U. Bojars, S. Decker, "<a class="small" href="http://socialsemantics.org/files/publications/20050519_eswc2005.pdf">Towards Semantically-Interlinked Online Communities</a>", Proceedings of the 2nd European Semantic Web Conference (ESWC '05), LNCS vol. 3532, pp. 500-514, Heraklion, Greece, 2005.</li>
+  <li>U. Bojars, J.G. Breslin, A. Passant, "<a href="http://socialsemantics.org/files/publications/20061003_btr_2006.pdf">SIOC Browser - Towards a Richer Blog Browsing Experience</a>", The 4th Blogtalk Conference (Blogtalk Reloaded), Vienna, Austria, October 2006.</li>
+  <li>For more SIOC-related publications, see the <a href="http://socialsemantics.org/publications.php">publications</a> page.</li>
 </ul>
 
 <h2><a name="sec-vocab" id="sec-vocab"></a>4. The SIOC ontology description</h2>
@@ -438,10 +444,11 @@ href="http://www.ietf.org/rfc/rfc2396.txt">http://www.ietf.org/rfc/rfc2396.txt</
 <li>2009-12-09: Added last_activity_date.</li>
 <li>2010-01-08: Added addressed_to.</li>
 <li>2010-03-25: Deprecated User in favour of UserAccount, and added embeds_knowledge. Updated foaf:holdsAccount to foaf:account throughout.</li>
+<li>2018-02-26: Added delivered_at, discussion_of, generator, likes, mentions, read_at, respond_to, shared_by. Changed domain/ranges of has_host, has_modifier, host_of, ip_address, modifier_of.</li>
 </ul>
 
-<address><a href="mailto:uldis.bojars@deri.org">uldis.bojars@deri.org</a></address>
-<address><a href="mailto:john.breslin@deri.org">john.breslin@deri.org</a></address>
+<address><a href="mailto:captsolo@gmail.com">captsolo@gmail.com</a></address>
+<address><a href="mailto:john.breslin@nuigalway.ie">john.breslin@nuigalway.ie</a></address>
 
 </body>
 

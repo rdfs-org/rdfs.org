@@ -1,3 +1,3 @@
 <p>
-This property is for a plain-text rendering of the content of an Item. Rich content (e.g., HTML, wiki markup, BBCode, etc.) can be described using the Content class from AtomOwl or the content:encoded property from the RSS 1.0 Content Module.
+This property is for a plain-text rendering of the content of an Item. Rich content (e.g. HTML, wiki markup, BBCode, etc.) can be described using the Content class from AtomOwl or the content:encoded property from the RSS 1.0 Content Module.
 </p>

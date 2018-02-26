@@ -48,7 +48,7 @@
 <!-- SIOC Core Ontology -->
 <owl:Ontology rdf:about="http://rdfs.org/sioc/ns#" rdf:type="http://www.w3.org/2002/07/owl#Thing">
   <dcterms:title xml:lang="en">SIOC Core Ontology Namespace</dcterms:title>
-  <owl:versionInfo>Revision: 1.35</owl:versionInfo>
+  <owl:versionInfo>Revision: 1.36</owl:versionInfo>
   <dcterms:description xml:lang="en">SIOC (Semantically-Interlinked Online Communities) is an ontology for describing the information in online communities. 
 This information can be used to export information from online communities and to link them together. The scope of the application areas that SIOC can be used for includes (and is not limited to) weblogs, message boards, mailing lists and chat channels.</dcterms:description>
   <rdfs:seeAlso rdf:resource="http://rdfs.org/sioc/spec" rdfs:label="SIOC Core Ontology Specification"/>
@@ -100,6 +100,7 @@ This information can be used to export information from online communities and t
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:Class>
 
+<!-- @@todo: moving this class to the access module ? -->
 <owl:Class rdf:about="http://rdfs.org/sioc/ns#Role">
   <rdfs:label xml:lang="en">Role</rdfs:label>
   <rdfs:comment xml:lang="en">A Role is a function of a UserAccount within a scope of a particular Forum, Site, etc.</rdfs:comment>
@@ -214,6 +215,7 @@ This information can be used to export information from online communities and t
   <rdfs:comment xml:lang="en">An Item that this Container contains.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Container"/>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/hasPart"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -230,6 +232,23 @@ This information can be used to export information from online communities and t
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#has_creator"/>
   <rdfs:comment xml:lang="en">A resource that the UserAccount is a creator of.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#UserAccount"/>
+  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#delivered_at">
+  <rdfs:label xml:lang="en">delivered at</rdfs:label>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdfs:comment xml:lang="en">When this was delivered, in ISO 8601 format.</rdfs:comment>
+  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#discussion_of">
+  <rdfs:label xml:lang="en">discussion of</rdfs:label>
+  <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#has_discussion"/>
+  <rdfs:comment xml:lang="en">The Item that this discussion is about.</rdfs:comment>
+  <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Item"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -288,6 +307,14 @@ This information can be used to export information from online communities and t
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#generator">
+  <rdfs:label xml:lang="en">generator</rdfs:label>
+  <rdfs:comment xml:lang="en">A URI for the application used to generate this Item.</rdfs:comment>
+  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:ObjectProperty>
+
+<!-- @@todo: moving this property to the access module ? -->
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#has_administrator">
   <rdfs:label xml:lang="en">has administrator</rdfs:label>
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#administrator_of"/>
@@ -303,6 +330,7 @@ This information can be used to export information from online communities and t
   <rdfs:comment xml:lang="en">The Container to which this Item belongs.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Container"/>
+  <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/partOf"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -315,10 +343,11 @@ This information can be used to export information from online communities and t
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#has_discussion">
-  <rdfs:comment xml:lang="en">The discussion that is related to this Item.</rdfs:comment>
+  <rdfs:label xml:lang="en">has discussion</rdfs:label>
+  <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#discussion_of"/>
+  <rdfs:comment xml:lang="en">A discussion that is related to this Item. The discussion can be anything, for example, a sioc:Forum or sioc:Thread, a sioct:WikiArticle or simply a foaf:Document.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
-  <rdfs:label xml:lang="en">has discussion</rdfs:label>
 </owl:ObjectProperty>
 
 <!-- @@todo: moving this property to the access module ? -->
@@ -333,8 +362,8 @@ This information can be used to export information from online communities and t
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#has_host">
   <rdfs:label xml:lang="en">has host</rdfs:label>
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#host_of"/>
-  <rdfs:comment xml:lang="en">The Site that hosts this Forum.</rdfs:comment>
-  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Forum"/>
+  <rdfs:comment xml:lang="en">The Site that hosts this Container.</rdfs:comment>
+  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Container"/>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Site"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
@@ -351,7 +380,7 @@ This information can be used to export information from online communities and t
 <!-- @@todo: moving this property to the access module ? -->
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#has_moderator">
   <rdfs:label xml:lang="en">has moderator</rdfs:label>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#moderator_of"/>
   <rdfs:comment xml:lang="en">A UserAccount that is a moderator of this Forum.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Forum"/>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#UserAccount"/>
@@ -361,8 +390,7 @@ This information can be used to export information from online communities and t
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#has_modifier">
   <rdfs:label xml:lang="en">has modifier</rdfs:label>
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#modifier_of"/>
-  <rdfs:comment xml:lang="en">A UserAccount that modified this Item.</rdfs:comment>
-  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:comment xml:lang="en">A UserAccount that modified this resource (e.g. Item, Container, Space).</rdfs:comment>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#UserAccount"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
@@ -381,6 +409,7 @@ This information can be used to export information from online communities and t
   <rdfs:comment xml:lang="en">A Container or Forum that this Container or Forum is a child of.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Container"/>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Container"/>
+  <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/partOf"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -408,6 +437,7 @@ This information can be used to export information from online communities and t
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#space_of"/>
   <rdfs:comment xml:lang="en">A data Space which this resource is a part of.</rdfs:comment>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Space"/>
+  <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/partOf"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -433,9 +463,9 @@ This information can be used to export information from online communities and t
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#host_of">
   <rdfs:label xml:lang="en">host of</rdfs:label>
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#has_host"/>
-  <rdfs:comment xml:lang="en">A Forum that is hosted on this Site.</rdfs:comment>
+  <rdfs:comment xml:lang="en">A Container that is hosted on this Site.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Site"/>
-  <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Forum"/>
+  <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Container"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -448,8 +478,7 @@ This information can be used to export information from online communities and t
 
 <owl:DatatypeProperty rdf:about="http://rdfs.org/sioc/ns#ip_address">
   <rdfs:label xml:lang="en">ip address</rdfs:label>
-  <rdfs:comment xml:lang="en">The IP address used when creating this Item. This can be associated with a creator. Some wiki articles list the IP addresses for the creator or modifiers when the usernames are absent.</rdfs:comment>
-  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:comment xml:lang="en">The IP address used when creating this Item, UserAccount, etc. This can be associated with a creator. Some wiki articles list the IP addresses for the creator or modifiers when the usernames are absent.</rdfs:comment>
   <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:DatatypeProperty>
@@ -496,6 +525,12 @@ This information can be used to export information from online communities and t
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Item"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#likes">
+  <rdfs:label xml:lang="en">likes</rdfs:label>
+  <rdfs:comment xml:lang="en">Used to indicate some form of endorsement by a UserAccount or Agent of an Item, Container, Space, UserAccount, etc.</rdfs:comment>
+  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#link">
   <rdfs:label xml:lang="en">link</rdfs:label>
   <rdfs:comment xml:lang="en">A URI of a document which contains this SIOC object.</rdfs:comment>
@@ -518,6 +553,15 @@ This information can be used to export information from online communities and t
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#mentions">
+  <rdfs:label xml:lang="en">mentions</rdfs:label>
+  <rdfs:comment xml:lang="en">Refers to a UserAccount that a particular Item mentions.</rdfs:comment>
+  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#UserAccount"/>
+  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:ObjectProperty>
+
+<!-- @@todo: moving this property to the access module ? -->
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#moderator_of">
   <rdfs:label xml:lang="en">moderator of</rdfs:label>
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#has_moderator"/>
@@ -530,9 +574,8 @@ This information can be used to export information from online communities and t
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#modifier_of">
   <rdfs:label xml:lang="en">modifier of</rdfs:label>
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#has_modifier"/>
-  <rdfs:comment xml:lang="en">An Item that this UserAccount has modified.</rdfs:comment>
+  <rdfs:comment xml:lang="en">A resource that this UserAccount has modified.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#UserAccount"/>
-  <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Item"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -620,6 +663,7 @@ This information can be used to export information from online communities and t
   <rdfs:comment xml:lang="en">A child Container or Forum that this Container or Forum is a parent of.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Container"/>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Container"/>
+  <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/hasPart"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -642,10 +686,18 @@ This information can be used to export information from online communities and t
   <rdfs:subPropertyOf rdf:resource="http://rdfs.org/sioc/ns#earlier_version"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#read_at">
+  <rdfs:label xml:lang="en">read at</rdfs:label>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdfs:comment xml:lang="en">When this was read, in ISO 8601 format.</rdfs:comment>
+  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#related_to">
   <rdfs:label xml:lang="en">related to</rdfs:label>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  <rdfs:comment xml:lang="en">Related Posts for this Post, perhaps determined implicitly from topics or references.</rdfs:comment>
+  <rdfs:comment xml:lang="en">Related resources for this resource, e.g. for Posts, perhaps determined implicitly from topics or references.</rdfs:comment>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -659,6 +711,13 @@ This information can be used to export information from online communities and t
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#respond_to">
+  <rdfs:label xml:lang="en">respond to</rdfs:label>
+  <rdfs:comment xml:lang="en">For the reply-to address set in email messages, IMs, etc. The property name was chosen to avoid confusion with has_reply/reply_of (the reply graph).</rdfs:comment>
+  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:ObjectProperty>
+
 <!-- @@todo: moving this property to the access module ? -->
 <owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#scope_of">
   <rdfs:label xml:lang="en">scope of</rdfs:label>
@@ -666,6 +725,15 @@ This information can be used to export information from online communities and t
   <rdfs:comment xml:lang="en">A Role that has a scope of this resource.</rdfs:comment>
   <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#Role"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://rdfs.org/sioc/ns#shared_by">
+  <rdfs:label xml:lang="en">shared by</rdfs:label>
+  <rdfs:comment xml:lang="en">For shared Items where there is a certain creator_of and an intermediary who shares or forwards it (e.g. as a sibling Item).</rdfs:comment>
+  <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+  <rdfs:range rdf:resource="http://rdfs.org/sioc/ns#UserAccount"/>
+  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
+  <rdfs:seeAlso rdf:resource="http://rdfs.org/sioc/ns#sibling"/>
 </owl:ObjectProperty>
 
 <owl:SymmetricProperty rdf:about="http://rdfs.org/sioc/ns#sibling">
@@ -681,6 +749,7 @@ This information can be used to export information from online communities and t
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#has_space"/>
   <rdfs:comment xml:lang="en">A resource which belongs to this data Space.</rdfs:comment>
   <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Space"/>
+  <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/hasPart"/>
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/ns#"/>
 </owl:ObjectProperty>
 
@@ -782,7 +851,6 @@ This information can be used to export information from online communities and t
   <owl:inverseOf rdf:resource="http://rdfs.org/sioc/ns#has_group"/>
   <owl:versionInfo>This property has been renamed. Use sioc:usergroup_of instead.</owl:versionInfo>
 </owl:DeprecatedProperty>
-
 
 <owl:DeprecatedProperty rdf:about="http://rdfs.org/sioc/ns#has_group">
   <rdfs:label xml:lang="en">has group</rdfs:label>

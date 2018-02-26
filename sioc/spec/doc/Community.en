@@ -1,5 +1,5 @@
 <p>
 A Community may consist of different types of objects (people, sites, etc.) joined by a common topic, interests or goals. 
 </p><p>
-A Community is different from a Site: a Site describes a single community site whilst a Community can consist of a number of Sites and other resources described in SIOC or other ontologies (e.g., FOAF). Community is linked to its constituent parts using the property dcterms:hasPart.
+A Community is different from a Site: a Site describes a single community site whilst a Community can consist of a number of Sites and other resources described in SIOC or other ontologies (e.g. FOAF). Community is linked to its constituent parts using the property dcterms:hasPart.
 </p>

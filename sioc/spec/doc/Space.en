@@ -1,3 +1,3 @@
 <p>
-A Space is defined as being a place where data resides. It can be the location for a set of Containers of content Items, e.g., on a Site, personal desktop, shared filespace, etc. Any data object that resides on a particular Space can be linked to it using the sioc:has_space property.  
+A Space is defined as being a place where data resides. It can be the location for a set of Containers of content Items, e.g. on a Site, personal desktop, shared filespace, etc. Any data object that resides on a particular Space can be linked to it using the sioc:has_space property.  
 </p>

@@ -1,3 +1,3 @@
 <p>
-This property links an Item or Post to the UserAccount that modified it (e.g., contributed new content to it after its creation). Being a modifier of a Post is not a Role.
+This property links a resource to the UserAccount that modified it (e.g. contributed new content to it after its creation).
 </p>

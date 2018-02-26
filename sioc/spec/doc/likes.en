@@ -1,0 +1,1 @@
+Used to indicate some form of endorsement by a UserAccount or Agent of an Item, Container, Space, UserAccount, etc. This provides a lightweight option to denote who liked what. For a fuller description of the like action/activity with associated dates and more, use the Like Activity Type in ActivityStreams or the LikeAction in schema.org.

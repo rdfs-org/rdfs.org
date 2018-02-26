@@ -439,8 +439,8 @@ def usage():
 if __name__ == "__main__":
     """Specification generator tool, used for SIOC ontology maintenance."""
     
-    specloc = "file:index.rdf"
-    temploc = "template.html"
+    specloc = "file:../ns.rdf"
+    temploc = "sioc_template.html"
     mode = "spec"
 
     try:

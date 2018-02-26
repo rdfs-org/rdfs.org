@@ -30,20 +30,6 @@
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/access#"/>
 </rdfs:Class>
 
-<!--
-<rdfs:Class rdf:about="http://rdfs.org/sioc/access#Role">
-  <rdfs:label xml:lang="en">Role</rdfs:label>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  <rdfs:comment xml:lang="en">A Role is a function of a UserAccount within a scope of a particular Forum, Site, etc.</rdfs:comment>
-  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/access#"/>
-  <owl:disjointWith rdf:resource="http://rdfs.org/sioc/ns#Container"/>
-  <owl:disjointWith rdf:resource="http://rdfs.org/sioc/ns#Item"/>
-  <owl:disjointWith rdf:resource="http://rdfs.org/sioc/ns#Space"/>
-  <owl:disjointWith rdf:resource="http://rdfs.org/sioc/ns#UserAccount"/>
-  <owl:disjointWith rdf:resource="http://rdfs.org/sioc/ns#Usergroup"/>
-</rdfs:Class>
--->
-
 <rdfs:Class rdf:about="http://rdfs.org/sioc/access#Status">
   <rdfs:label xml:lang="en">Status</rdfs:label>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -51,36 +37,9 @@
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/access#"/>
 </rdfs:Class>
 
+<!-- @@todo: moving Role class from core to the access module ? -->
+
 <!-- Properties -->
-
-<!--
-<rdf:Property rdf:about="http://rdfs.org/sioc/access#function_of">
-  <rdfs:label xml:lang="en">function of</rdfs:label>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  <owl:inverseOf rdf:resource="http://rdfs.org/sioc/access#has_function"/>
-  <rdfs:comment xml:lang="en">A UserAccount that has this Role.</rdfs:comment>
-  <rdfs:domain rdf:resource="http://rdfs.org/sioc/access#Role"/>
-  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/access#"/>
-</rdf:Property>
-
-<rdf:Property rdf:about="http://rdfs.org/sioc/access#has_function">
-  <rdfs:label xml:lang="en">has function</rdfs:label>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  <owl:inverseOf rdf:resource="http://rdfs.org/sioc/access#function_of"/>
-  <rdfs:comment xml:lang="en">A Role that this UserAccount has.</rdfs:comment>
-  <rdfs:range rdf:resource="http://rdfs.org/sioc/access#Role"/>
-  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/access#"/>
-</rdf:Property>
-
-<rdf:Property rdf:about="http://rdfs.org/sioc/access#has_scope">
-  <rdfs:label xml:lang="en">has scope</rdfs:label>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  <owl:inverseOf rdf:resource="http://rdfs.org/sioc/access#scope_of"/>
-  <rdfs:comment xml:lang="en">A resource that this Role applies to.</rdfs:comment>
-  <rdfs:domain rdf:resource="http://rdfs.org/sioc/access#Role"/>
-  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/access#"/>
-</rdf:Property>
--->
 
 <rdf:Property rdf:about="http://rdfs.org/sioc/access#has_permission">
   <rdfs:label xml:lang="en">has permission</rdfs:label>
@@ -100,15 +59,7 @@
   <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/access#"/>
 </rdf:Property>
 
-<!--
-<rdf:Property rdf:about="http://rdfs.org/sioc/access#scope_of">
-  <rdfs:label xml:lang="en">scope of</rdfs:label>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  <owl:inverseOf rdf:resource="http://rdfs.org/sioc/access#has_scope"/>
-  <rdfs:comment xml:lang="en">A Role that has a scope of this resource.</rdfs:comment>
-  <rdfs:range rdf:resource="http://rdfs.org/sioc/access#Role"/>
-  <rdfs:isDefinedBy rdf:resource="http://rdfs.org/sioc/access#"/>
-</rdf:Property>
--->
+<!-- @@todo: moving administrator_of, function_of, has_administrator, has_function
+has_moderator, has_scope, moderator_of, scope_of properties to the access module ? -->
 
 </rdf:RDF>
