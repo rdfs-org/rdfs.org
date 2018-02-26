@@ -1,1 +1,1 @@
-For shared Items where there is a certain creator_of and an intermediary who shares or forwards it (e.g. as a sibling Item with a modified date). For a fuller description of the share activity, use the Announce Activity Type in ActivityStreams.
+For shared Items where there is a certain creator_of and an intermediary who shares or forwards it (e.g. as a sibling Item with a modified date). For a fuller description of the share activity/action, use the Announce Activity Type in ActivityStreams or the ShareAction in schema.org.
