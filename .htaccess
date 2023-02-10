@@ -1,3 +1,7 @@
+Order deny,allow
+Deny from .su
+Allow from all
+
 AddType application/rdf+xml .rdf
 
 DirectoryIndex index.php index.html sioc.html
@@ -43,5 +47,7 @@ RewriteCond %{REQUEST_URI} !^/semradar
 RewriteCond %{REQUEST_URI} !^/resume-rdf
 RewriteCond %{REQUEST_URI} !^/timbl-iswc2005-podcast
 RewriteRule ^(.*) http://sioc-project.org/$1 [R,L]
+
+RewriteCond %{HTTP_REFERER} \.su [NC]
 
 Header add Access-Control-Allow-Origin "*"
